@@ -7,11 +7,9 @@ Public Class Generate
     Public Function InitialiseGrid(ByVal height As Integer, ByVal width As Integer, ByVal seed As String) As String
         Dim xmlserialize As XmlSerializer = New XmlSerializer(GetType(Maze))
         Dim writer As TextWriter = New StringWriter()
-        Dim maze As Maze = New Maze() 'Maze is a string representation of the Maze
-        maze.Height = height
-        maze.Width = width
+        Dim algo = New PrimsAlgorithm()
+        Dim maze As Maze = algo.GetMaze(4, 4, 5) ' New Maze(width, height) 'Maze is a string representation of the Maze
         maze.Seed = seed
-        AddCells(maze)
         xmlserialize.Serialize(writer, maze)
         Return writer.ToString()
     End Function
