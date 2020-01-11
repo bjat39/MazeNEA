@@ -7,7 +7,7 @@ Public Class RecursiveDivision
     Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As String) As Maze Implements IMazeGenerator.GetMaze
         Randomize()
         Dim randomNumber = New Random()
-        Dim maze As Maze = New Maze(x, y)
-
+        Dim maze As Maze = New Maze(x, y, True)
+        Return maze
     End Function
 End Class

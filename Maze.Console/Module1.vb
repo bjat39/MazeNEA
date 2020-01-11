@@ -8,7 +8,7 @@ Module Module1
     Sub Main()
         'generates a maze
         Dim m As Generate = New Generate()
-        Dim mazeXml = m.InitialiseGrid(4, 4, 4, MazeGenerationAlgorithms.RecursiveDivision)
+        Dim mazeXml = m.InitialiseGrid(10, 10, 4, MazeGenerationAlgorithms.RecursiveBacktracker)
         Console.WriteLine(mazeXml)
 
         'reads/deserializes the maze from the returned xml
@@ -18,15 +18,27 @@ Module Module1
         returnedMaze = serial.Deserialize(xmlReader)
 
         For y As Integer = 0 To returnedMaze.Height - 1
+            'writes the north walls
             For x As Integer = 0 To returnedMaze.Width - 1
                 Dim c As Cell = returnedMaze.GetCell(x, y)
                 If c.NorthWall = True Then
-                    Console.Write("--")
+                    If x = returnedMaze.Width - 1 Then
+                        Console.Write("---")
+                    Else
+                        Console.Write("--")
+                    End If
                 Else
-                    Console.Write("  ")
+                    If x = 0 Then
+                        Console.Write("- ")
+                    ElseIf x = returnedMaze.Width - 1 Then
+                        Console.Write("- -") 'change perhaps
+                    Else
+                        Console.Write("- ") 'change perhaps
+                    End If
                 End If
             Next
             Console.WriteLine("")
+            'writes the east and west walls
             For x As Integer = 0 To returnedMaze.Width - 1
                 Dim c As Cell = returnedMaze.GetCell(x, y)
                 If c.WestWall = True Then
@@ -39,10 +51,15 @@ Module Module1
                 End If
             Next
             Console.WriteLine("")
+            'writes the south wall for the the bottom most row
             For x As Integer = 0 To returnedMaze.Width - 1
                 Dim c As Cell = returnedMaze.GetCell(x, y)
                 If c.SouthWall = True And y = returnedMaze.Height - 1 Then
-                    Console.Write("--")
+                    If x = returnedMaze.Width - 1 Then
+                        Console.Write("---")
+                    Else
+                        Console.Write("--")
+                    End If
                 End If
             Next
         Next

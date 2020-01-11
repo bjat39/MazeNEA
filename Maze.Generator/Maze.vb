@@ -29,9 +29,9 @@ Public Class Maze
             Next
             For k As Integer = 0 To Height - 1
                 Dim leftCell = GetCell(0, k)
-                leftCell.EastWall = True
+                leftCell.WestWall = True
                 Dim rightCell = GetCell(Width - 1, k)
-                rightCell.WestWall = True
+                rightCell.EastWall = True
             Next
         End If
 
