@@ -3,12 +3,28 @@ Imports System.IO
 Imports System.Xml
 Imports System.Xml.Serialization
 
+Public Enum MazeGenerationAlgorithms
+    PrimsAlgorithm
+    RecursiveBacktracker
+    RecursiveDivision
+End Enum
+
 Public Class Generate
-    Public Function InitialiseGrid(ByVal height As Integer, ByVal width As Integer, ByVal seed As String) As String
+    Public Function InitialiseGrid(ByVal width As Integer, ByVal height As Integer, ByVal seed As String, ByVal algo As MazeGenerationAlgorithms) As String
         Dim xmlserialize As XmlSerializer = New XmlSerializer(GetType(Maze))
         Dim writer As TextWriter = New StringWriter()
-        Dim algo = New PrimsAlgorithm()
-        Dim maze As Maze = algo.GetMaze(4, 4, 5) ' New Maze(width, height) 'Maze is a string representation of the Maze
+        Dim gen As IMazeGenerator
+        Select Case algo
+            Case MazeGenerationAlgorithms.PrimsAlgorithm
+                gen = New PrimsAlgorithm()
+            Case MazeGenerationAlgorithms.RecursiveBacktracker
+                gen = New RecursiveBacktracker()
+            Case MazeGenerationAlgorithms.RecursiveDivision
+                gen = New RecursiveDivision()
+            Case Else
+                Throw New NotImplementedException()
+        End Select
+        Dim maze As Maze = gen.GetMaze(width, height, seed) ' New Maze(width, height) 'Maze is a string representation of the Maze
         maze.Seed = seed
         xmlserialize.Serialize(writer, maze)
         Return writer.ToString()

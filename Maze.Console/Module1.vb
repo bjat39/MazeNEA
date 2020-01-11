@@ -8,7 +8,7 @@ Module Module1
     Sub Main()
         'generates a maze
         Dim m As Generate = New Generate()
-        Dim mazeXml = m.InitialiseGrid(4, 4, 4)
+        Dim mazeXml = m.InitialiseGrid(4, 4, 4, MazeGenerationAlgorithms.RecursiveDivision)
         Console.WriteLine(mazeXml)
 
         'reads/deserializes the maze from the returned xml
