@@ -16,7 +16,7 @@ Public Class RecursiveDivision
     End Function
 
     Private Shared Sub BisectMaze(beginX As Integer, endX As Integer, beginY As Integer, endY As Integer, maze As Maze)
-        Console.WriteLine($"Bisect maze beginX = {beginX} endX = {endX} beginY = {beginY} endY = {endY}")
+        'Console.WriteLine($"Bisect maze beginX = {beginX} endX = {endX} beginY = {beginY} endY = {endY}")
 
         Dim randomNumber = New Random()
         Dim rowtobisect As Integer
@@ -30,7 +30,6 @@ Public Class RecursiveDivision
             horizontalVertical = randomNumber.Next(0, 2)
         End If
         If horizontalVertical = 0 Then
-            Console.WriteLine("Horizontal")
             rowtobisect = randomNumber.Next(beginY, endY)
             wheretocarve = randomNumber.Next(beginX, endX)
             For o As Integer = beginX To endX
@@ -40,6 +39,9 @@ Public Class RecursiveDivision
                     Utility.Fill(currentCell, otherCell)
                 End If
             Next
+            'Console.WriteLine($"Horizontol, split at {rowtobisect}")
+            'Utility.DisplayAsciiMaze(maze)
+
             If beginY <> rowtobisect Then
                 BisectMaze(beginX, endX, beginY, rowtobisect, maze)
             End If
@@ -47,7 +49,6 @@ Public Class RecursiveDivision
                 BisectMaze(beginX, endX, rowtobisect + 1, endY, maze)
             End If
         Else
-            Console.WriteLine("Vertical")
             rowtobisect = randomNumber.Next(beginX, endX)
             wheretocarve = randomNumber.Next(beginY, endY)
             For o As Integer = beginY To endY
@@ -58,6 +59,9 @@ Public Class RecursiveDivision
                 End If
 
             Next
+            'Console.WriteLine($"Vertical, split at {rowtobisect}")
+            'Utility.DisplayAsciiMaze(maze)
+
             If beginX <> rowtobisect Then
                 BisectMaze(beginX, rowtobisect, beginY, endY, maze)
             End If
