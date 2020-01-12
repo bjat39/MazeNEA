@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Maze.Generator.Tests")>
+<Assembly: AssemblyTitle("Maze.Creator.Tests")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("Maze.Generator.Tests")>
+<Assembly: AssemblyProduct("Maze.Creator.Tests")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("")>
 
