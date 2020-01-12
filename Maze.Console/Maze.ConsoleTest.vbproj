@@ -107,7 +107,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Maze.Generator\Maze.Creator.vbproj">
+    <ProjectReference Include="..\Maze.Creator\Maze.Creator.vbproj">
       <Project>{435dc21e-9911-435b-a085-cc2527ddfcd4}</Project>
       <Name>Maze.Creator</Name>
     </ProjectReference>
