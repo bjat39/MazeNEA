@@ -1,4 +1,7 @@
-﻿Public Class Utility
+﻿Imports System.IO
+Imports System.Xml.Serialization
+
+Public Class Utility
     Public Shared Function GetAdjacentPoints(ByRef p As Point, ByRef maxX As Integer, ByRef maxY As Integer) As List(Of Point)
         Dim adjacentPoints = New List(Of Point)()
         If p.Y - 1 >= 0 Then
@@ -29,6 +32,13 @@
         Next
     End Sub
 
+    Public Shared Sub RemoveParent(parent As Point, children As List(Of Point))
+        Dim foundPoint = children.Find(Function(p) p.X = parent.X And p.Y = parent.Y)
+        If (foundPoint IsNot Nothing) Then
+            children.Remove(foundPoint)
+        End If
+    End Sub
+
     Public Shared Sub Carve(currentCell As Cell, cellToCarve As Cell)
         If currentCell.X < cellToCarve.X Then
             currentCell.EastWall = False
@@ -44,6 +54,7 @@
             cellToCarve.SouthWall = False
         End If
     End Sub
+
     Public Shared Sub Fill(currentCell As Cell, otherCell As Cell)
         If currentCell.X < otherCell.X Then
             currentCell.EastWall = True
@@ -60,7 +71,20 @@
         End If
     End Sub
 
-    Public Shared Sub DisplayAsciiMaze(returnedMaze As Creator.Maze)
+    Public Shared Function IsWall(currentCell As Cell, otherCell As Cell) As Boolean
+        If currentCell.X < otherCell.X Then
+            Return currentCell.EastWall
+        ElseIf currentCell.X > otherCell.X Then
+            Return currentCell.WestWall
+        ElseIf currentCell.Y < otherCell.Y Then
+            Return currentCell.SouthWall
+        ElseIf currentCell.Y > otherCell.Y Then
+            Return currentCell.NorthWall
+        End If
+        Return False
+    End Function
+
+    Public Shared Sub DisplayAsciiMaze(returnedMaze As Creator.Maze, Optional path As List(Of Point) = Nothing)
         For y As Integer = 0 To returnedMaze.Height - 1
             'writes the north walls
             For x As Integer = 0 To returnedMaze.Width - 1
@@ -75,9 +99,9 @@
                     If x = 0 Then
                         Console.Write("- ")
                     ElseIf x = returnedMaze.Width - 1 Then
-                        Console.Write("- -") 'change perhaps
+                        Console.Write("- -")
                     Else
-                        Console.Write("- ") 'change perhaps
+                        Console.Write("- ")
                     End If
                 End If
             Next
@@ -85,14 +109,29 @@
             'writes the east and west walls
             For x As Integer = 0 To returnedMaze.Width - 1
                 Dim c As Cell = returnedMaze.GetCell(x, y)
-                If c.WestWall = True Then
-                    Console.Write("| ")
+                Dim foundPoint As Point = Nothing
+                If path IsNot Nothing Then
+                    Dim height = y
+                    Dim width = x
+                    foundPoint = path.Find(Function(p) p.X = width And p.Y = height)
+                End If
+                If foundPoint IsNot Nothing Then
+                    If c.WestWall = True Then
+                        Console.Write("|x")
+                    Else
+                        Console.Write(" x")
+                    End If
                 Else
-                    Console.Write("  ")
+                    If c.WestWall = True Then
+                        Console.Write("| ")
+                    Else
+                        Console.Write("  ")
+                    End If
                 End If
                 If c.EastWall = True And x = returnedMaze.Height - 1 Then
                     Console.Write("|")
                 End If
+
             Next
             Console.WriteLine("")
             'writes the south wall for the the bottom most row
@@ -111,4 +150,221 @@
         Console.WriteLine("")
     End Sub
 
+    Public Shared Function ConvertXMLToMaze(mazeXml As String) As Creator.Maze
+        'reads/deserializes the maze from the returned xml
+        Dim returnedMaze As Creator.Maze
+        Dim xmlReader As TextReader = New StringReader(mazeXml)
+        Dim serial As XmlSerializer = New XmlSerializer(GetType(Creator.Maze))
+        returnedMaze = serial.Deserialize(xmlReader)
+        Return returnedMaze
+    End Function
+
+    Public Shared DefaultMaze = "<?xml version=""1.0"" encoding=""utf-16""?>
+<Maze xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <Height>5</Height>
+  <Width>5</Width>
+  <Seed>4</Seed>
+  <Cells>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>true</WestWall>
+      <X>0</X>
+      <Y>0</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>0</X>
+      <Y>1</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>true</WestWall>
+      <X>0</X>
+      <Y>2</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>true</WestWall>
+      <X>0</X>
+      <Y>3</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>0</X>
+      <Y>4</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>false</WestWall>
+      <X>1</X>
+      <Y>0</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>true</WestWall>
+      <X>1</X>
+      <Y>1</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>false</WestWall>
+      <X>1</X>
+      <Y>2</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>true</WestWall>
+      <X>1</X>
+      <Y>3</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>1</X>
+      <Y>4</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>false</WestWall>
+      <X>2</X>
+      <Y>0</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>2</X>
+      <Y>1</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>false</WestWall>
+      <X>2</X>
+      <Y>2</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>true</WestWall>
+      <X>2</X>
+      <Y>3</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>2</X>
+      <Y>4</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>false</WestWall>
+      <X>3</X>
+      <Y>0</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>3</X>
+      <Y>1</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>false</WestWall>
+      <X>3</X>
+      <Y>2</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>false</SouthWall>
+      <WestWall>false</WestWall>
+      <X>3</X>
+      <Y>3</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>false</NorthWall>
+      <EastWall>false</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>true</WestWall>
+      <X>3</X>
+      <Y>4</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>false</WestWall>
+      <X>4</X>
+      <Y>0</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>false</WestWall>
+      <X>4</X>
+      <Y>1</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>false</WestWall>
+      <X>4</X>
+      <Y>2</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>false</WestWall>
+      <X>4</X>
+      <Y>3</Y>
+    </Cell>
+    <Cell>
+      <NorthWall>true</NorthWall>
+      <EastWall>true</EastWall>
+      <SouthWall>true</SouthWall>
+      <WestWall>false</WestWall>
+      <X>4</X>
+      <Y>4</Y>
+    </Cell>
+  </Cells>
+</Maze>"
 End Class

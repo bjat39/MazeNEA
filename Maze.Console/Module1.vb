@@ -13,23 +13,32 @@ Module Module1
         'Dim returnedMaze2 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveBacktracker)
         'Console.WriteLine("RecursiveBacktracker")
         'Utility.DisplayAsciiMaze(returnedMaze2)
-        Dim returnedMaze3 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveDivision)
-        Console.WriteLine("REcursiveDivision")
-        Utility.DisplayAsciiMaze(returnedMaze3)
+        'Dim returnedMaze3 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveDivision)
+        'Console.WriteLine("REcursiveDivision")
+        'Utility.DisplayAsciiMaze(returnedMaze3)
+        Dim solver = New Solve()
+
+        Dim tempMaze = Utility.ConvertXMLToMaze(Utility.DefaultMaze)
+        Dim solution = solver.SolveMaze(Utility.DefaultMaze, New Point(0, 0), New Point(tempMaze.Width - 1, tempMaze.Width - 1))
+        If solution Is Nothing Or solution.Count = 0 Then
+            Console.WriteLine("no solution")
+        Else
+            Console.Write($"path = ")
+            For Each point In solution
+                Console.Write($"({point.X}, {point.Y}) ")
+            Next
+            Console.WriteLine()
+        End If
+        Utility.DisplayAsciiMaze(tempMaze, solution)
         Console.ReadLine()
     End Sub
 
     Private Function GenerateMaze(algorithm As MazeGenerationAlgorithms) As Creator.Maze
         Dim m As Generate = New Generate()
         Dim mazeXml = m.InitialiseGrid(5, 5, 4, algorithm)
-        'Console.WriteLine(mazeXml)
+        Console.WriteLine(mazeXml)
 
-        'reads/deserializes the maze from the returned xml
-        Dim returnedMaze As Creator.Maze
-        Dim xmlReader As TextReader = New StringReader(mazeXml)
-        Dim serial As XmlSerializer = New XmlSerializer(GetType(Creator.Maze))
-        returnedMaze = serial.Deserialize(xmlReader)
+        Dim returnedMaze As Creator.Maze = Utility.ConvertXMLToMaze(mazeXml)
         Return returnedMaze
     End Function
-
 End Module
