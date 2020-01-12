@@ -159,6 +159,22 @@ Public Class Utility
         Return returnedMaze
     End Function
 
+    Public Shared Function FindPath(mazeToSolve As Creator.Maze) As List(Of Point)
+        Dim solver = New Solve()
+        Dim solution = solver.SolveMaze(mazeToSolve, New Point(0, 0), New Point(mazeToSolve.Width - 1, mazeToSolve.Width - 1))
+        If solution Is Nothing Or solution.Count = 0 Then
+            Console.WriteLine("no solution")
+        Else
+            Console.Write($"path = ")
+            For Each point In solution
+                Console.Write($"({point.X}, {point.Y}) ")
+            Next
+            Console.WriteLine()
+        End If
+
+        Return solution
+    End Function
+
     Public Shared DefaultMaze = "<?xml version=""1.0"" encoding=""utf-16""?>
 <Maze xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <Height>5</Height>

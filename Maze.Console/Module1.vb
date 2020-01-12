@@ -7,36 +7,34 @@ Module Module1
 
     Sub Main()
         'generates a maze
-        'Dim returnedMaze1 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.PrimsAlgorithm)
-        'Console.WriteLine("Prims")
-        'Utility.DisplayAsciiMaze(returnedMaze1)
-        'Dim returnedMaze2 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveBacktracker)
-        'Console.WriteLine("RecursiveBacktracker")
-        'Utility.DisplayAsciiMaze(returnedMaze2)
-        'Dim returnedMaze3 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveDivision)
-        'Console.WriteLine("REcursiveDivision")
-        'Utility.DisplayAsciiMaze(returnedMaze3)
-        Dim solver = New Solve()
 
+
+        Dim returnedMaze1 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.PrimsAlgorithm)
+        Dim solution1 As List(Of Point) = Utility.FindPath(returnedMaze1)
+        Console.WriteLine("Prims")
+        Utility.DisplayAsciiMaze(returnedMaze1, solution1)
+
+        Dim returnedMaze2 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveBacktracker)
+        Dim solution2 As List(Of Point) = Utility.FindPath(returnedMaze2)
+        Console.WriteLine("RecursiveBacktracker")
+        Utility.DisplayAsciiMaze(returnedMaze2, solution2)
+
+        Dim returnedMaze3 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.RecursiveDivision)
+        Dim solution3 As List(Of Point) = Utility.FindPath(returnedMaze3)
+        Console.WriteLine("RecursiveDivision")
+        Utility.DisplayAsciiMaze(returnedMaze3, solution3)
+
+        Console.WriteLine("Default maze test")
         Dim tempMaze = Utility.ConvertXMLToMaze(Utility.DefaultMaze)
-        Dim solution = solver.SolveMaze(Utility.DefaultMaze, New Point(0, 0), New Point(tempMaze.Width - 1, tempMaze.Width - 1))
-        If solution Is Nothing Or solution.Count = 0 Then
-            Console.WriteLine("no solution")
-        Else
-            Console.Write($"path = ")
-            For Each point In solution
-                Console.Write($"({point.X}, {point.Y}) ")
-            Next
-            Console.WriteLine()
-        End If
+        Dim solution As List(Of Point) = Utility.FindPath(tempMaze)
         Utility.DisplayAsciiMaze(tempMaze, solution)
         Console.ReadLine()
     End Sub
 
     Private Function GenerateMaze(algorithm As MazeGenerationAlgorithms) As Creator.Maze
         Dim m As Generate = New Generate()
-        Dim mazeXml = m.InitialiseGrid(5, 5, 4, algorithm)
-        Console.WriteLine(mazeXml)
+        Dim mazeXml = m.InitialiseGrid(8, 8, 4, algorithm)
+        'Console.WriteLine(mazeXml)
 
         Dim returnedMaze As Creator.Maze = Utility.ConvertXMLToMaze(mazeXml)
         Return returnedMaze

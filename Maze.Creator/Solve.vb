@@ -2,9 +2,15 @@
 
 Public Class Solve
     Implements IMazeSolver
+
     Public Function SolveMaze(mazeXML As String, startPoint As Point, endPoint As Point) As List(Of Point) Implements IMazeSolver.SolveMaze
-        Dim solution = New List(Of Point)
         Dim mazeToSolve As Creator.Maze = Utility.ConvertXMLToMaze(mazeXML)
+
+        return SolveMaze(mazeToSolve, startPoint, endPoint)
+    End Function
+
+    Public Function SolveMaze(mazeToSolve As Creator.Maze, startPoint As Point, endPoint As Point) As List(Of Point) Implements IMazeSolver.SolveMaze
+        Dim solution = New List(Of Point)
         Dim q = New Queue(Of Point)
         Dim parent As Point = startPoint
         If startPoint.X = endPoint.X And startPoint.Y = endPoint.Y Then
