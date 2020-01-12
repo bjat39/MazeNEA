@@ -1,4 +1,6 @@
 ﻿
+Imports System.IO
+Imports System.Xml.Serialization
 Imports Maze.Generator
 
 Public Class RecursiveDivision
@@ -6,8 +8,62 @@ Public Class RecursiveDivision
 
     Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As String) As Maze Implements IMazeGenerator.GetMaze
         Randomize()
-        Dim randomNumber = New Random()
-        Dim maze As Maze = New Maze(x, y, True)
+        Dim maze As Maze = New Maze(x, y, False)
+
+        BisectMaze(0, x - 1, 0, y - 1, maze)
+
         Return maze
     End Function
+
+    Private Shared Sub BisectMaze(beginX As Integer, endX As Integer, beginY As Integer, endY As Integer, maze As Maze)
+        Console.WriteLine($"Bisect maze beginX = {beginX} endX = {endX} beginY = {beginY} endY = {endY}")
+
+        Dim randomNumber = New Random()
+        Dim rowtobisect As Integer
+        Dim wheretocarve As Integer
+        Dim horizontalVertical = 0 'randomNumber.Next(0, 2)
+        If endX - beginX > endY - beginY Then
+            horizontalVertical = 1
+        ElseIf endX - beginX < endY - beginY Then
+            horizontalVertical = 0
+        Else
+            horizontalVertical = randomNumber.Next(0, 2)
+        End If
+        If horizontalVertical = 0 Then
+            Console.WriteLine("Horizontal")
+            rowtobisect = randomNumber.Next(beginY, endY)
+            wheretocarve = randomNumber.Next(beginX, endX)
+            For o As Integer = beginX To endX
+                If o <> wheretocarve Then
+                    Dim currentCell = maze.GetCell(o, rowtobisect)
+                    Dim otherCell = maze.GetCell(o, rowtobisect + 1)
+                    Utility.Fill(currentCell, otherCell)
+                End If
+            Next
+            If beginY <> rowtobisect Then
+                BisectMaze(beginX, endX, beginY, rowtobisect, maze)
+            End If
+            If rowtobisect + 1 <> endY Then
+                BisectMaze(beginX, endX, rowtobisect + 1, endY, maze)
+            End If
+        Else
+            Console.WriteLine("Vertical")
+            rowtobisect = randomNumber.Next(beginX, endX)
+            wheretocarve = randomNumber.Next(beginY, endY)
+            For o As Integer = beginY To endY
+                If o <> wheretocarve Then
+                    Dim currentCell = maze.GetCell(rowtobisect, o)
+                    Dim otherCell = maze.GetCell(rowtobisect + 1, o)
+                    Utility.Fill(currentCell, otherCell)
+                End If
+
+            Next
+            If beginX <> rowtobisect Then
+                BisectMaze(beginX, rowtobisect, beginY, endY, maze)
+            End If
+            If rowtobisect + 1 <> endX Then
+                BisectMaze(rowtobisect + 1, endX, beginY, endY, maze)
+            End If
+        End If
+    End Sub
 End Class
