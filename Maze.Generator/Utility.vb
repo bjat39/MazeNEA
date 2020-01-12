@@ -60,7 +60,7 @@
         End If
     End Sub
 
-    Public Shared Sub DisplayAsciiMaze(returnedMaze As Generator.Maze)
+    Public Shared Sub DisplayAsciiMaze(returnedMaze As Creator.Maze)
         For y As Integer = 0 To returnedMaze.Height - 1
             'writes the north walls
             For x As Integer = 0 To returnedMaze.Width - 1

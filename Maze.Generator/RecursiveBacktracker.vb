@@ -1,4 +1,4 @@
-﻿Imports Maze.Generator
+﻿Imports Maze.Creator
 
 Friend Class RecursiveBacktracker
     Implements IMazeGenerator

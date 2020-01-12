@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A1C2CE5C-54E5-43A8-9EEC-4A27B3F18EA4}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Maze.Generator.Tests</RootNamespace>
-    <AssemblyName>Maze.Generator.Tests</AssemblyName>
+    <RootNamespace>Maze.Creator.Tests</RootNamespace>
+    <AssemblyName>Maze.Creator.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Maze.Generator.Tests.xml</DocumentationFile>
+    <DocumentationFile>Maze.Creator.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Maze.Generator.Tests.xml</DocumentationFile>
+    <DocumentationFile>Maze.Creator.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -108,9 +108,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Maze.Generator\Maze.Generator.vbproj">
+    <ProjectReference Include="..\Maze.Generator\Maze.Creator.vbproj">
       <Project>{435dc21e-9911-435b-a085-cc2527ddfcd4}</Project>
-      <Name>Maze.Generator</Name>
+      <Name>Maze.Creator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

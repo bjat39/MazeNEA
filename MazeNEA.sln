@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MazeUI", "Maze.UI\MazeUI.vbproj", "{0E9C2292-5C61-4D1B-936D-34A698345EA6}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Maze.Generator", "Maze.Generator\Maze.Generator.vbproj", "{435DC21E-9911-435B-A085-CC2527DDFCD4}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Maze.Creator", "Maze.Generator\Maze.Creator.vbproj", "{435DC21E-9911-435B-A085-CC2527DDFCD4}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Maze.Generator.Tests", "Maze.Generator.Tests\Maze.Generator.Tests.vbproj", "{A1C2CE5C-54E5-43A8-9EEC-4A27B3F18EA4}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Maze.Creator.Tests", "Maze.Generator.Tests\Maze.Creator.Tests.vbproj", "{A1C2CE5C-54E5-43A8-9EEC-4A27B3F18EA4}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Maze.ConsoleTest", "Maze.Console\Maze.ConsoleTest.vbproj", "{3DCBCDF1-E7D4-41E3-A218-7A273EC9A872}"
 EndProject

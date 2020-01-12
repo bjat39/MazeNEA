@@ -4,35 +4,31 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3DCBCDF1-E7D4-41E3-A218-7A273EC9A872}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <StartupObject>Maze.ConsoleTest.Module1</StartupObject>
-    <RootNamespace>Maze.ConsoleTest</RootNamespace>
-    <AssemblyName>Maze.ConsoleTest</AssemblyName>
+    <ProjectGuid>{435DC21E-9911-435B-A085-CC2527DDFCD4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Maze.Creator</RootNamespace>
+    <AssemblyName>Maze.Creator</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Console</MyType>
+    <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Maze.ConsoleTest.xml</DocumentationFile>
+    <DocumentationFile>Maze.Creator.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Maze.ConsoleTest.xml</DocumentationFile>
+    <DocumentationFile>Maze.Creator.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -50,7 +46,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,7 +64,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module1.vb" />
+    <Compile Include="Cell.vb" />
+    <Compile Include="Generate.vb" />
+    <Compile Include="IMazeGenerator.vb" />
+    <Compile Include="IMazeSolver.vb" />
+    <Compile Include="Maze.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -85,6 +84,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Point.vb" />
+    <Compile Include="PrimsAlgorithm.vb" />
+    <Compile Include="RecursiveBacktracker.vb" />
+    <Compile Include="RecursiveDivision.vb" />
+    <Compile Include="Utility.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -104,13 +108,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Maze.Generator\Maze.Creator.vbproj">
-      <Project>{435dc21e-9911-435b-a085-cc2527ddfcd4}</Project>
-      <Name>Maze.Creator</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

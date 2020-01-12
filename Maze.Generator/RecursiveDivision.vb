@@ -1,7 +1,7 @@
 ﻿
 Imports System.IO
 Imports System.Xml.Serialization
-Imports Maze.Generator
+Imports Maze.Creator
 
 Public Class RecursiveDivision
     Implements IMazeGenerator
