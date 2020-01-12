@@ -3,7 +3,7 @@
 Public Class Maze
     Public Height As Integer
     Public Width As Integer
-    Public Seed As String = ""
+    Public Seed As Integer
     <XmlArray("Cells")>
     Public Cells As List(Of Cell)
 
@@ -11,9 +11,10 @@ Public Class Maze
         'no initialization used by xml serializer
     End Sub
 
-    Public Sub New(x As Integer, y As Integer, Optional allWalls As Boolean = True)
+    Public Sub New(x As Integer, y As Integer, seed As integer, Optional allWalls As Boolean = True)
         Height = y
         Width = x
+        Seed = seed
         Cells = New List(Of Cell)()
         For i As Integer = 0 To Height - 1
             For j As Integer = 0 To Width - 1

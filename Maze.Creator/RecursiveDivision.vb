@@ -6,19 +6,19 @@ Imports Maze.Creator
 Public Class RecursiveDivision
     Implements IMazeGenerator
 
-    Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As String) As Maze Implements IMazeGenerator.GetMaze
+    Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As Integer) As Maze Implements IMazeGenerator.GetMaze
         Randomize()
-        Dim maze As Maze = New Maze(x, y, False)
+        Dim randomNumber = New Random(seed)
+        Dim maze As Maze = New Maze(x, y, seed, False) 'watch seed
 
-        BisectMaze(0, x - 1, 0, y - 1, maze)
+        BisectMaze(0, x - 1, 0, y - 1, maze, randomNumber)
 
         Return maze
     End Function
 
-    Private Shared Sub BisectMaze(beginX As Integer, endX As Integer, beginY As Integer, endY As Integer, maze As Maze)
+    Private Shared Sub BisectMaze(beginX As Integer, endX As Integer, beginY As Integer, endY As Integer, maze As Maze, randomNumber As Random)
         'Console.WriteLine($"Bisect maze beginX = {beginX} endX = {endX} beginY = {beginY} endY = {endY}")
 
-        Dim randomNumber = New Random()
         Dim rowtobisect As Integer
         Dim wheretocarve As Integer
         Dim horizontalVertical = 0 'randomNumber.Next(0, 2)
@@ -43,10 +43,10 @@ Public Class RecursiveDivision
             'Utility.DisplayAsciiMaze(maze)
 
             If beginY <> rowtobisect Then
-                BisectMaze(beginX, endX, beginY, rowtobisect, maze)
+                BisectMaze(beginX, endX, beginY, rowtobisect, maze, randomNumber)
             End If
             If rowtobisect + 1 <> endY Then
-                BisectMaze(beginX, endX, rowtobisect + 1, endY, maze)
+                BisectMaze(beginX, endX, rowtobisect + 1, endY, maze, randomNumber)
             End If
         Else
             rowtobisect = randomNumber.Next(beginX, endX)
@@ -63,10 +63,10 @@ Public Class RecursiveDivision
             'Utility.DisplayAsciiMaze(maze)
 
             If beginX <> rowtobisect Then
-                BisectMaze(beginX, rowtobisect, beginY, endY, maze)
+                BisectMaze(beginX, rowtobisect, beginY, endY, maze, randomNumber)
             End If
             If rowtobisect + 1 <> endX Then
-                BisectMaze(rowtobisect + 1, endX, beginY, endY, maze)
+                BisectMaze(rowtobisect + 1, endX, beginY, endY, maze, randomNumber)
             End If
         End If
     End Sub

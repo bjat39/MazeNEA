@@ -2,10 +2,10 @@
 
 Friend Class RecursiveBacktracker
     Implements IMazeGenerator
-    Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As String) As Maze Implements IMazeGenerator.GetMaze
+    Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As integer) As Maze Implements IMazeGenerator.GetMaze
         Randomize()
-        Dim randomNumber = New Random()
-        Dim maze As Maze = New Maze(x, y)
+        Dim randomNumber = New Random(seed)
+        Dim maze As Maze = New Maze(x, y, seed)
         Dim currentPosition As Point = New Point(0, 0)
         Dim stack = New Stack(Of Point)
         Dim carvedPoints = New List(Of Point)

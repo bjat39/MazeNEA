@@ -33,7 +33,7 @@ Module Module1
 
     Private Function GenerateMaze(algorithm As MazeGenerationAlgorithms) As Creator.Maze
         Dim m As Generate = New Generate()
-        Dim mazeXml = m.InitialiseGrid(8, 8, 4, algorithm)
+        Dim mazeXml = m.InitialiseGrid(8, 8, 40000, algorithm)
         'Console.WriteLine(mazeXml)
 
         Dim returnedMaze As Creator.Maze = Utility.ConvertXMLToMaze(mazeXml)

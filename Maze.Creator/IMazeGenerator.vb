@@ -1,5 +1,5 @@
 ﻿Public Interface IMazeGenerator
-    Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As String) As Maze
+    Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As Integer) As Maze
 
 
 End Interface
