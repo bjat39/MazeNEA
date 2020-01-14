@@ -32,7 +32,7 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Maze.UI.Form1
+            Me.MainForm = Global.Maze.UI.MainMenu
         End Sub
     End Class
 End Namespace

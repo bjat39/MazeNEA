@@ -16,8 +16,8 @@ Public Class Maze
         Width = x
         Seed = seed
         Cells = New List(Of Cell)()
-        For i As Integer = 0 To Height - 1
-            For j As Integer = 0 To Width - 1
+        For i As Integer = 0 To Width - 1
+            For j As Integer = 0 To Height - 1
                 Cells.Add(New Cell(i, j, allWalls))
             Next
         Next
