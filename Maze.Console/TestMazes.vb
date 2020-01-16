@@ -3,7 +3,7 @@ Imports System.Xml
 Imports System.Xml.Serialization
 Imports Maze.Creator
 
-Module Module1
+Module TestMazes
 
     Sub Main()
         'generates a maze

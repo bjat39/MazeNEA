@@ -33,6 +33,11 @@ Partial Class MazeCustomisation
         Me.AlgorithmLabel = New System.Windows.Forms.Label()
         Me.RandomSeed = New System.Windows.Forms.Button()
         Me.MazeGrid = New System.Windows.Forms.Panel()
+        Me.ToggleSolution = New System.Windows.Forms.Button()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.SaveMazeButton = New System.Windows.Forms.Button()
+        Me.LoadMazeButton = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.MazeWidth,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeHeight,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeSeed,System.ComponentModel.ISupportInitialize).BeginInit
@@ -132,11 +137,45 @@ Partial Class MazeCustomisation
         Me.MazeGrid.Size = New System.Drawing.Size(450, 426)
         Me.MazeGrid.TabIndex = 13
         '
+        'ToggleSolution
+        '
+        Me.ToggleSolution.Location = New System.Drawing.Point(15, 196)
+        Me.ToggleSolution.Name = "ToggleSolution"
+        Me.ToggleSolution.Size = New System.Drawing.Size(140, 23)
+        Me.ToggleSolution.TabIndex = 14
+        Me.ToggleSolution.Text = "Toggle Solution"
+        Me.ToggleSolution.UseVisualStyleBackColor = true
+        '
+        'SaveMazeButton
+        '
+        Me.SaveMazeButton.Location = New System.Drawing.Point(15, 254)
+        Me.SaveMazeButton.Name = "SaveMazeButton"
+        Me.SaveMazeButton.Size = New System.Drawing.Size(140, 23)
+        Me.SaveMazeButton.TabIndex = 15
+        Me.SaveMazeButton.Text = "Save Maze"
+        Me.SaveMazeButton.UseVisualStyleBackColor = true
+        '
+        'LoadMazeButton
+        '
+        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 225)
+        Me.LoadMazeButton.Name = "LoadMazeButton"
+        Me.LoadMazeButton.Size = New System.Drawing.Size(140, 23)
+        Me.LoadMazeButton.TabIndex = 16
+        Me.LoadMazeButton.Text = "Load Maze"
+        Me.LoadMazeButton.UseVisualStyleBackColor = true
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'MazeCustomisation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(623, 450)
+        Me.Controls.Add(Me.LoadMazeButton)
+        Me.Controls.Add(Me.SaveMazeButton)
+        Me.Controls.Add(Me.ToggleSolution)
         Me.Controls.Add(Me.MazeGrid)
         Me.Controls.Add(Me.RandomSeed)
         Me.Controls.Add(Me.AlgorithmLabel)
@@ -169,4 +208,9 @@ End Sub
     Friend WithEvents AlgorithmLabel As Label
     Friend WithEvents RandomSeed As Button
     Friend WithEvents MazeGrid As Panel
+    Friend WithEvents ToggleSolution As Button
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents SaveMazeButton As Button
+    Friend WithEvents LoadMazeButton As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

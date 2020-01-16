@@ -1,9 +1,12 @@
-﻿Imports Maze.Creator
+﻿Imports System.IO
+Imports System.Xml.Serialization
+Imports Maze.Creator
 
 Public Class MazeCustomisation
     Dim MazeModel As Creator.Maze
     Dim CellSize As Integer
     Dim Solution As List(Of Point)
+    Dim ShowSolution As Boolean = False
 
     Private Sub GenerateButton_Click(sender As Object, e As EventArgs) Handles GenerateButton.Click
         Dim m As Generate = New Generate()
@@ -11,6 +14,15 @@ Public Class MazeCustomisation
         MazeModel = Utility.ConvertXMLToMaze(mazeXml)
         Dim mazeSolver = New Solve()
         Solution = mazeSolver.SolveMaze(mazeXml, New Point(0, 0), New Point(MazeModel.Width - 1, MazeModel.Height - 1))
+        SetCellSize()
+        'Debug.WriteLine($"Cell width = {CellWidth}")
+        'Debug.WriteLine($"Cell height = {CellHeight}")
+        'Debug.WriteLine($"Cell size = {CellSize}")
+        'Debug.WriteLine($"Maze Grid = {MazeGrid.Width}, {MazeGrid.Height}")
+        Me.Refresh()
+    End Sub
+
+    Private Sub SetCellSize()
         Dim CellWidth As Integer = Math.Floor((MazeGrid.Width - 1) / MazeWidth.Value)
         Dim CellHeight As Integer = Math.Floor((MazeGrid.Height - 1) / MazeHeight.Value)
         If CellWidth < CellHeight Then
@@ -18,11 +30,6 @@ Public Class MazeCustomisation
         Else
             CellSize = CellHeight
         End If
-        'Debug.WriteLine($"Cell width = {CellWidth}")
-        'Debug.WriteLine($"Cell height = {CellHeight}")
-        'Debug.WriteLine($"Cell size = {CellSize}")
-        'Debug.WriteLine($"Maze Grid = {MazeGrid.Width}, {MazeGrid.Height}")
-        Me.Refresh()
     End Sub
 
     Private Sub MazeCustomisation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -82,20 +89,70 @@ Public Class MazeCustomisation
                     End If
                 Next
             Next
-            Dim firstPoint As Point
-            Dim secondPoint As Point
-            Dim redPen = New Pen(Color.Red)
-            For Each point In Solution
-                secondPoint = point
-                If firstPoint IsNot Nothing Then
-                    Dim x1 As Integer = firstPoint.X * size + size / 2
-                    Dim y1 As Integer = firstPoint.Y * size + size / 2
-                    Dim x2 As Integer = secondPoint.X * size + size / 2
-                    Dim y2 As Integer = secondPoint.Y * size + size / 2
-                    e.Graphics.DrawLine(redPen, x1, y1, x2, y2)
-                End If
-                firstPoint = secondPoint
-            Next
+            If ShowSolution = True Then
+                Dim firstPoint As Point
+                Dim secondPoint As Point
+                Dim redPen = New Pen(Color.Red)
+                For Each point In Solution
+                    secondPoint = point
+                    If firstPoint IsNot Nothing Then
+                        Dim x1 As Integer = firstPoint.X * size + size / 2
+                        Dim y1 As Integer = firstPoint.Y * size + size / 2
+                        Dim x2 As Integer = secondPoint.X * size + size / 2
+                        Dim y2 As Integer = secondPoint.Y * size + size / 2
+                        e.Graphics.DrawLine(redPen, x1, y1, x2, y2)
+                    End If
+                    firstPoint = secondPoint
+                Next
+            End If
+            Dim fontSize As Integer = Math.Floor(size / 2)
+            Dim drawFont As Font = New Font("Arial", fontSize, FontStyle.Bold)
+            Dim drawBrush As SolidBrush = New SolidBrush(Color.Green)
+            Dim drawPoint As PointF = New PointF(size / 4, size / 4)
+            e.Graphics.DrawString("S", drawFont, drawBrush, drawPoint)
+
+            Dim exitX As Integer = MazeModel.Width * size - size * 0.75
+            Dim exitY As Integer = MazeModel.Height * size - size * 0.75
+            Dim exitPoint As PointF = New PointF(exitX, exitY)
+            e.Graphics.DrawString("E", drawFont, drawBrush, exitPoint)
+        End If
+    End Sub
+
+    Private Sub ToggleSolution_Click(sender As Object, e As EventArgs) Handles ToggleSolution.Click
+        If ShowSolution = False Then
+            ShowSolution = True
+        Else
+            ShowSolution = False
+        End If
+        Me.Refresh()
+    End Sub
+
+    Private Sub SaveMazeButton_Click(sender As Object, e As EventArgs) Handles SaveMazeButton.Click
+        SaveFileDialog1.Filter = "XML | *.xml"
+        SaveFileDialog1.Title = "Save A Maze"
+        SaveFileDialog1.ShowDialog()
+
+        If Not String.IsNullOrEmpty(SaveFileDialog1.FileName) Then
+            Dim xmlserialize As XmlSerializer = New XmlSerializer(GetType(Creator.Maze))
+            Dim file As StreamWriter = New StreamWriter(SaveFileDialog1.FileName)
+
+            xmlserialize.Serialize(file, MazeModel)
+            file.Close()
+        End If
+    End Sub
+
+    Private Sub LoadMazeButton_Click(sender As Object, e As EventArgs) Handles LoadMazeButton.Click
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Dim serial As XmlSerializer = New XmlSerializer(GetType(Creator.Maze))
+            Dim readStream As FileStream = New FileStream(OpenFileDialog1.FileName, FileMode.Open)
+
+            MazeModel = serial.Deserialize(readStream)
+            readStream.Close
+            MazeHeight.Value = MazeModel.Height
+            MazeWidth.Value = MazeModel.Width
+            MazeSeed.Value = MazeModel.Seed
+            SetCellSize()
+            Me.Refresh
         End If
     End Sub
 End Class

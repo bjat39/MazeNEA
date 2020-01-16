@@ -73,13 +73,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenu.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainMenu.Designer.vb">
-      <DependentUpon>MainMenu.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="MazeCustomisation.Designer.vb">
       <DependentUpon>MazeCustomisation.vb</DependentUpon>
     </Compile>
@@ -103,9 +96,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainMenu.resx">
-      <DependentUpon>MainMenu.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MazeCustomisation.resx">
       <DependentUpon>MazeCustomisation.vb</DependentUpon>
     </EmbeddedResource>
