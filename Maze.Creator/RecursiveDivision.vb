@@ -6,10 +6,10 @@ Imports Maze.Creator
 Public Class RecursiveDivision
     Implements IMazeGenerator
 
-    Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As Integer) As Maze Implements IMazeGenerator.GetMaze
+    Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As Integer, ByRef algorithm As MazeGenerationAlgorithms) As Maze Implements IMazeGenerator.GetMaze
         Randomize()
         Dim randomNumber = New Random(seed)
-        Dim maze As Maze = New Maze(x, y, seed, False) 'watch seed
+        Dim maze As Maze = New Maze(x, y, seed, algorithm, False) 'watch seed
 
         BisectMaze(0, x - 1, 0, y - 1, maze, randomNumber)
 

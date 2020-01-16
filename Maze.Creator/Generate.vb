@@ -24,7 +24,7 @@ Public Class Generate
             Case Else
                 Throw New NotImplementedException()
         End Select
-        Dim maze As Maze = gen.GetMaze(width, height, seed) ' New Maze(width, height) 'Maze is a string representation of the Maze
+        Dim maze As Maze = gen.GetMaze(width, height, seed, algo) ' New Maze(width, height) 'Maze is a string representation of the Maze
         maze.Seed = seed
         xmlserialize.Serialize(writer, maze)
         Return writer.ToString()
