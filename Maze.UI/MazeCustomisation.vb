@@ -7,6 +7,8 @@ Public Class MazeCustomisation
     Dim CellSize As Integer
     Dim Solution As List(Of Point)
     Dim ShowSolution As Boolean = False
+    Dim UserLocation As Point = New Point(0, 0)
+    Dim ExitPoint As Point
 
     Private Sub GenerateButton_Click(sender As Object, e As EventArgs) Handles GenerateButton.Click
         Dim m As Generate = New Generate()
@@ -15,6 +17,7 @@ Public Class MazeCustomisation
         Dim mazeSolver = New Solve()
         Solution = mazeSolver.SolveMaze(mazeXml, New Point(0, 0), New Point(MazeModel.Width - 1, MazeModel.Height - 1))
         SetCellSize()
+        ExitPoint = New Point(MazeModel.Width, MazeModel.Height)
         'Debug.WriteLine($"Cell width = {CellWidth}")
         'Debug.WriteLine($"Cell height = {CellHeight}")
         'Debug.WriteLine($"Cell size = {CellSize}")
@@ -109,12 +112,17 @@ Public Class MazeCustomisation
             Dim drawFont As Font = New Font("Arial", fontSize, FontStyle.Bold)
             Dim drawBrush As SolidBrush = New SolidBrush(Color.Green)
             Dim drawPoint As PointF = New PointF(size / 4, size / 4)
-            e.Graphics.DrawString("S", drawFont, drawBrush, drawPoint)
+            e.Graphics.DrawString("*", drawFont, drawBrush, drawPoint)
 
             Dim exitX As Integer = MazeModel.Width * size - size * 0.75
             Dim exitY As Integer = MazeModel.Height * size - size * 0.75
             Dim exitPoint As PointF = New PointF(exitX, exitY)
-            e.Graphics.DrawString("E", drawFont, drawBrush, exitPoint)
+            e.Graphics.DrawString("*", drawFont, drawBrush, exitPoint)
+
+            Dim userX As Integer = UserLocation.X * size + size / 8
+            Dim userY As Integer = UserLocation.Y * size + size / 8
+            Dim userPoint As PointF = New PointF(userX, userY)
+            e.Graphics.DrawString("@", drawFont, drawBrush, userPoint)
         End If
     End Sub
 
@@ -147,12 +155,58 @@ Public Class MazeCustomisation
             Dim readStream As FileStream = New FileStream(OpenFileDialog1.FileName, FileMode.Open)
 
             MazeModel = serial.Deserialize(readStream)
-            readStream.Close
+            readStream.Close()
             MazeHeight.Value = MazeModel.Height
             MazeWidth.Value = MazeModel.Width
             MazeSeed.Value = MazeModel.Seed
             SetCellSize()
-            Me.Refresh
+            Me.Refresh()
+        End If
+    End Sub
+
+
+    Private Sub MazeCustomisation_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp, MyBase.KeyDown
+        If e.KeyCode = Keys.Left Then
+        End If
+        If e.KeyCode = Keys.Up Then
+        End If
+        If e.KeyCode = Keys.Down Then
+        End If
+        If e.KeyCode = Keys.Right Then
+        End If
+        Me.Refresh()
+    End Sub
+
+
+    Private Sub GoEast_Click(sender As Object, e As EventArgs) Handles GoEast.Click
+        Dim cell = MazeModel.GetCell(UserLocation)
+        If Not cell.EastWall Then
+            UserLocation.X = UserLocation.X + 1
+            Me.Refresh()
+        End If
+    End Sub
+
+    Private Sub GoNorth_Click(sender As Object, e As EventArgs) Handles GoNorth.Click
+        Dim cell = MazeModel.GetCell(UserLocation)
+        If Not cell.NorthWall Then
+            UserLocation.Y = UserLocation.Y - 1
+            Me.Refresh()
+        End If
+    End Sub
+
+    Private Sub GoWest_Click(sender As Object, e As EventArgs) Handles GoWest.Click
+        Dim cell = MazeModel.GetCell(UserLocation)
+        If Not cell.WestWall Then
+            UserLocation.X = UserLocation.X - 1
+            Me.Refresh()
+        End If
+    End Sub
+
+    Private Sub GoSouth_Click(sender As Object, e As EventArgs) Handles GoSouth.Click
+        Dim cell = MazeModel.GetCell(UserLocation)
+        If Not cell.SouthWall Then
+            UserLocation.Y = UserLocation.Y + 1
+            Me.Refresh()
         End If
     End Sub
 End Class

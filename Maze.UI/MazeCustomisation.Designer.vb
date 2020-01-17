@@ -38,6 +38,10 @@ Partial Class MazeCustomisation
         Me.SaveMazeButton = New System.Windows.Forms.Button()
         Me.LoadMazeButton = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.GoWest = New System.Windows.Forms.Button()
+        Me.GoNorth = New System.Windows.Forms.Button()
+        Me.GoEast = New System.Windows.Forms.Button()
+        Me.GoSouth = New System.Windows.Forms.Button()
         CType(Me.MazeWidth,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeHeight,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeSeed,System.ComponentModel.ISupportInitialize).BeginInit
@@ -168,11 +172,51 @@ Partial Class MazeCustomisation
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'GoWest
+        '
+        Me.GoWest.Location = New System.Drawing.Point(37, 312)
+        Me.GoWest.Name = "GoWest"
+        Me.GoWest.Size = New System.Drawing.Size(42, 23)
+        Me.GoWest.TabIndex = 17
+        Me.GoWest.Text = "West"
+        Me.GoWest.UseVisualStyleBackColor = true
+        '
+        'GoNorth
+        '
+        Me.GoNorth.Location = New System.Drawing.Point(61, 283)
+        Me.GoNorth.Name = "GoNorth"
+        Me.GoNorth.Size = New System.Drawing.Size(50, 23)
+        Me.GoNorth.TabIndex = 18
+        Me.GoNorth.Text = "North"
+        Me.GoNorth.UseVisualStyleBackColor = true
+        '
+        'GoEast
+        '
+        Me.GoEast.Location = New System.Drawing.Point(98, 312)
+        Me.GoEast.Name = "GoEast"
+        Me.GoEast.Size = New System.Drawing.Size(39, 23)
+        Me.GoEast.TabIndex = 19
+        Me.GoEast.Text = "East"
+        Me.GoEast.UseVisualStyleBackColor = true
+        '
+        'GoSouth
+        '
+        Me.GoSouth.Location = New System.Drawing.Point(61, 341)
+        Me.GoSouth.Name = "GoSouth"
+        Me.GoSouth.Size = New System.Drawing.Size(50, 23)
+        Me.GoSouth.TabIndex = 20
+        Me.GoSouth.Text = "South"
+        Me.GoSouth.UseVisualStyleBackColor = true
+        '
         'MazeCustomisation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(623, 450)
+        Me.Controls.Add(Me.GoSouth)
+        Me.Controls.Add(Me.GoEast)
+        Me.Controls.Add(Me.GoNorth)
+        Me.Controls.Add(Me.GoWest)
         Me.Controls.Add(Me.LoadMazeButton)
         Me.Controls.Add(Me.SaveMazeButton)
         Me.Controls.Add(Me.ToggleSolution)
@@ -213,4 +257,8 @@ End Sub
     Friend WithEvents SaveMazeButton As Button
     Friend WithEvents LoadMazeButton As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents GoWest As Button
+    Friend WithEvents GoNorth As Button
+    Friend WithEvents GoEast As Button
+    Friend WithEvents GoSouth As Button
 End Class
