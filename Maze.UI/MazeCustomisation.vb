@@ -12,12 +12,19 @@ Public Class MazeCustomisation
 
     Private Sub GenerateButton_Click(sender As Object, e As EventArgs) Handles GenerateButton.Click
         Dim m As Generate = New Generate()
+        Dim startTime As DateTime = DateTime.Now
         Dim mazeXml = m.InitialiseGrid(MazeWidth.Value, MazeHeight.Value, MazeSeed.Value, Algorithm.SelectedIndex)
+        Dim endTime As DateTime = DateTime.Now
+        Dim duration As TimeSpan = endTime - startTime
         MazeModel = Utility.ConvertXMLToMaze(mazeXml)
         Dim mazeSolver = New Solve()
         Solution = mazeSolver.SolveMaze(mazeXml, New Point(0, 0), New Point(MazeModel.Width - 1, MazeModel.Height - 1))
         SetCellSize()
         ExitPoint = New Point(MazeModel.Width, MazeModel.Height)
+        MazeSize.Text = $"no. cells = {MazeModel.Height * MazeModel.Width}"
+        TimeTaken.Text = $"maze gen took {CInt(duration.TotalMilliseconds)} ms"
+        PathLength.Text = $"shortest path is {Solution.Count - 1} cells"
+        
         'Debug.WriteLine($"Cell width = {CellWidth}")
         'Debug.WriteLine($"Cell height = {CellHeight}")
         'Debug.WriteLine($"Cell size = {CellSize}")

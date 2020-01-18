@@ -42,9 +42,14 @@ Partial Class MazeCustomisation
         Me.GoNorth = New System.Windows.Forms.Button()
         Me.GoEast = New System.Windows.Forms.Button()
         Me.GoSouth = New System.Windows.Forms.Button()
+        Me.Statistics = New System.Windows.Forms.GroupBox()
+        Me.PathLength = New System.Windows.Forms.Label()
+        Me.TimeTaken = New System.Windows.Forms.Label()
+        Me.MazeSize = New System.Windows.Forms.Label()
         CType(Me.MazeWidth,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeHeight,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeSeed,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Statistics.SuspendLayout
         Me.SuspendLayout
         '
         'Width
@@ -60,7 +65,7 @@ Partial Class MazeCustomisation
         'Height
         '
         Me.Height.AutoSize = true
-        Me.Height.Location = New System.Drawing.Point(12, 48)
+        Me.Height.Location = New System.Drawing.Point(12, 38)
         Me.Height.Name = "Height"
         Me.Height.Size = New System.Drawing.Size(38, 13)
         Me.Height.TabIndex = 14
@@ -69,7 +74,7 @@ Partial Class MazeCustomisation
         'Seed
         '
         Me.Seed.AutoSize = true
-        Me.Seed.Location = New System.Drawing.Point(12, 87)
+        Me.Seed.Location = New System.Drawing.Point(12, 64)
         Me.Seed.Name = "Seed"
         Me.Seed.Size = New System.Drawing.Size(32, 13)
         Me.Seed.TabIndex = 15
@@ -77,38 +82,38 @@ Partial Class MazeCustomisation
         '
         'GenerateButton
         '
-        Me.GenerateButton.Location = New System.Drawing.Point(15, 379)
+        Me.GenerateButton.Location = New System.Drawing.Point(15, 408)
         Me.GenerateButton.Name = "GenerateButton"
-        Me.GenerateButton.Size = New System.Drawing.Size(140, 59)
+        Me.GenerateButton.Size = New System.Drawing.Size(140, 30)
         Me.GenerateButton.TabIndex = 12
         Me.GenerateButton.Text = "Generate"
         Me.GenerateButton.UseVisualStyleBackColor = true
         '
         'MazeWidth
         '
-        Me.MazeWidth.Location = New System.Drawing.Point(15, 25)
+        Me.MazeWidth.Location = New System.Drawing.Point(53, 9)
         Me.MazeWidth.Name = "MazeWidth"
-        Me.MazeWidth.Size = New System.Drawing.Size(140, 20)
+        Me.MazeWidth.Size = New System.Drawing.Size(102, 20)
         Me.MazeWidth.TabIndex = 0
         '
         'MazeHeight
         '
-        Me.MazeHeight.Location = New System.Drawing.Point(15, 64)
+        Me.MazeHeight.Location = New System.Drawing.Point(53, 36)
         Me.MazeHeight.Name = "MazeHeight"
-        Me.MazeHeight.Size = New System.Drawing.Size(140, 20)
+        Me.MazeHeight.Size = New System.Drawing.Size(102, 20)
         Me.MazeHeight.TabIndex = 1
         '
         'MazeSeed
         '
-        Me.MazeSeed.Location = New System.Drawing.Point(15, 103)
+        Me.MazeSeed.Location = New System.Drawing.Point(53, 62)
         Me.MazeSeed.Name = "MazeSeed"
-        Me.MazeSeed.Size = New System.Drawing.Size(140, 20)
+        Me.MazeSeed.Size = New System.Drawing.Size(102, 20)
         Me.MazeSeed.TabIndex = 2
         '
         'Algorithm
         '
         Me.Algorithm.FormattingEnabled = true
-        Me.Algorithm.Location = New System.Drawing.Point(15, 168)
+        Me.Algorithm.Location = New System.Drawing.Point(15, 127)
         Me.Algorithm.Name = "Algorithm"
         Me.Algorithm.Size = New System.Drawing.Size(140, 21)
         Me.Algorithm.TabIndex = 4
@@ -116,7 +121,7 @@ Partial Class MazeCustomisation
         'AlgorithmLabel
         '
         Me.AlgorithmLabel.AutoSize = true
-        Me.AlgorithmLabel.Location = New System.Drawing.Point(12, 152)
+        Me.AlgorithmLabel.Location = New System.Drawing.Point(12, 111)
         Me.AlgorithmLabel.Name = "AlgorithmLabel"
         Me.AlgorithmLabel.Size = New System.Drawing.Size(50, 13)
         Me.AlgorithmLabel.TabIndex = 16
@@ -124,7 +129,7 @@ Partial Class MazeCustomisation
         '
         'RandomSeed
         '
-        Me.RandomSeed.Location = New System.Drawing.Point(15, 129)
+        Me.RandomSeed.Location = New System.Drawing.Point(15, 88)
         Me.RandomSeed.Name = "RandomSeed"
         Me.RandomSeed.Size = New System.Drawing.Size(140, 20)
         Me.RandomSeed.TabIndex = 3
@@ -143,7 +148,7 @@ Partial Class MazeCustomisation
         '
         'ToggleSolution
         '
-        Me.ToggleSolution.Location = New System.Drawing.Point(15, 196)
+        Me.ToggleSolution.Location = New System.Drawing.Point(15, 154)
         Me.ToggleSolution.Name = "ToggleSolution"
         Me.ToggleSolution.Size = New System.Drawing.Size(140, 23)
         Me.ToggleSolution.TabIndex = 5
@@ -152,20 +157,20 @@ Partial Class MazeCustomisation
         '
         'SaveMazeButton
         '
-        Me.SaveMazeButton.Location = New System.Drawing.Point(15, 254)
+        Me.SaveMazeButton.Location = New System.Drawing.Point(85, 183)
         Me.SaveMazeButton.Name = "SaveMazeButton"
-        Me.SaveMazeButton.Size = New System.Drawing.Size(140, 23)
+        Me.SaveMazeButton.Size = New System.Drawing.Size(70, 23)
         Me.SaveMazeButton.TabIndex = 7
-        Me.SaveMazeButton.Text = "Save Maze"
+        Me.SaveMazeButton.Text = "Save"
         Me.SaveMazeButton.UseVisualStyleBackColor = true
         '
         'LoadMazeButton
         '
-        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 225)
+        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 183)
         Me.LoadMazeButton.Name = "LoadMazeButton"
-        Me.LoadMazeButton.Size = New System.Drawing.Size(140, 23)
+        Me.LoadMazeButton.Size = New System.Drawing.Size(64, 23)
         Me.LoadMazeButton.TabIndex = 6
-        Me.LoadMazeButton.Text = "Load Maze"
+        Me.LoadMazeButton.Text = "Load"
         Me.LoadMazeButton.UseVisualStyleBackColor = true
         '
         'OpenFileDialog1
@@ -174,51 +179,90 @@ Partial Class MazeCustomisation
         '
         'GoWest
         '
-        Me.GoWest.Location = New System.Drawing.Point(37, 312)
+        Me.GoWest.Location = New System.Drawing.Point(53, 241)
         Me.GoWest.Name = "GoWest"
-        Me.GoWest.Size = New System.Drawing.Size(42, 23)
+        Me.GoWest.Size = New System.Drawing.Size(18, 23)
         Me.GoWest.TabIndex = 8
-        Me.GoWest.Text = "West"
+        Me.GoWest.Text = "W"
         Me.GoWest.UseVisualStyleBackColor = true
         '
         'GoNorth
         '
-        Me.GoNorth.Location = New System.Drawing.Point(61, 283)
+        Me.GoNorth.Location = New System.Drawing.Point(72, 212)
         Me.GoNorth.Name = "GoNorth"
-        Me.GoNorth.Size = New System.Drawing.Size(50, 23)
+        Me.GoNorth.Size = New System.Drawing.Size(18, 23)
         Me.GoNorth.TabIndex = 9
-        Me.GoNorth.Text = "North"
+        Me.GoNorth.Text = "N"
         Me.GoNorth.UseVisualStyleBackColor = true
         '
         'GoEast
         '
-        Me.GoEast.Location = New System.Drawing.Point(98, 312)
+        Me.GoEast.Location = New System.Drawing.Point(90, 241)
         Me.GoEast.Name = "GoEast"
-        Me.GoEast.Size = New System.Drawing.Size(39, 23)
+        Me.GoEast.Size = New System.Drawing.Size(18, 23)
         Me.GoEast.TabIndex = 10
-        Me.GoEast.Text = "East"
+        Me.GoEast.Text = "E"
         Me.GoEast.UseVisualStyleBackColor = true
         '
         'GoSouth
         '
-        Me.GoSouth.Location = New System.Drawing.Point(61, 341)
+        Me.GoSouth.Location = New System.Drawing.Point(72, 270)
         Me.GoSouth.Name = "GoSouth"
-        Me.GoSouth.Size = New System.Drawing.Size(50, 23)
+        Me.GoSouth.Size = New System.Drawing.Size(18, 23)
         Me.GoSouth.TabIndex = 11
-        Me.GoSouth.Text = "South"
+        Me.GoSouth.Text = "S"
         Me.GoSouth.UseVisualStyleBackColor = true
+        '
+        'Statistics
+        '
+        Me.Statistics.Controls.Add(Me.PathLength)
+        Me.Statistics.Controls.Add(Me.TimeTaken)
+        Me.Statistics.Controls.Add(Me.MazeSize)
+        Me.Statistics.Location = New System.Drawing.Point(15, 301)
+        Me.Statistics.Name = "Statistics"
+        Me.Statistics.Size = New System.Drawing.Size(140, 101)
+        Me.Statistics.TabIndex = 18
+        Me.Statistics.TabStop = false
+        Me.Statistics.Text = "Statistics"
+        '
+        'PathLength
+        '
+        Me.PathLength.AutoSize = true
+        Me.PathLength.Location = New System.Drawing.Point(6, 51)
+        Me.PathLength.Name = "PathLength"
+        Me.PathLength.Size = New System.Drawing.Size(65, 13)
+        Me.PathLength.TabIndex = 2
+        Me.PathLength.Text = "Path Length"
+        '
+        'TimeTaken
+        '
+        Me.TimeTaken.AutoSize = true
+        Me.TimeTaken.Location = New System.Drawing.Point(6, 38)
+        Me.TimeTaken.Name = "TimeTaken"
+        Me.TimeTaken.Size = New System.Drawing.Size(61, 13)
+        Me.TimeTaken.TabIndex = 1
+        Me.TimeTaken.Text = "TimeTaken"
+        '
+        'MazeSize
+        '
+        Me.MazeSize.AutoSize = true
+        Me.MazeSize.Location = New System.Drawing.Point(6, 16)
+        Me.MazeSize.Name = "MazeSize"
+        Me.MazeSize.Size = New System.Drawing.Size(53, 13)
+        Me.MazeSize.TabIndex = 0
+        Me.MazeSize.Text = "MazeSize"
         '
         'MazeCustomisation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(623, 450)
+        Me.Controls.Add(Me.SaveMazeButton)
         Me.Controls.Add(Me.GoSouth)
         Me.Controls.Add(Me.GoEast)
         Me.Controls.Add(Me.GoNorth)
         Me.Controls.Add(Me.GoWest)
         Me.Controls.Add(Me.LoadMazeButton)
-        Me.Controls.Add(Me.SaveMazeButton)
         Me.Controls.Add(Me.ToggleSolution)
         Me.Controls.Add(Me.MazeGrid)
         Me.Controls.Add(Me.RandomSeed)
@@ -231,11 +275,14 @@ Partial Class MazeCustomisation
         Me.Controls.Add(Me.Seed)
         Me.Controls.Add(Me.Height)
         Me.Controls.Add(Me.Width)
+        Me.Controls.Add(Me.Statistics)
         Me.Name = "MazeCustomisation"
         Me.Text = "MazeCustomisation"
         CType(Me.MazeWidth,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.MazeHeight,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.MazeSeed,System.ComponentModel.ISupportInitialize).EndInit
+        Me.Statistics.ResumeLayout(false)
+        Me.Statistics.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -261,4 +308,8 @@ End Sub
     Friend WithEvents GoNorth As Button
     Friend WithEvents GoEast As Button
     Friend WithEvents GoSouth As Button
+    Friend WithEvents Statistics As GroupBox
+    Friend WithEvents MazeSize As Label
+    Friend WithEvents TimeTaken As Label
+    Friend WithEvents PathLength As Label
 End Class

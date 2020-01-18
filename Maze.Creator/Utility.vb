@@ -26,8 +26,8 @@ Public Class Utility
     Public Shared Sub ExcludePointsInFirstList(ByVal carvedPoints As List(Of Point), markedPoints As List(Of Point))
 
         Dim markedPointsToRemove = New List(Of Point)
-        For Each carvedPoint In carvedPoints 'removes the carved cells from the marked points
-            For Each markedPoint In markedPoints
+        For Each markedPoint In markedPoints
+            For Each carvedPoint In carvedPoints 'removes the carved cells from the marked points
                 If markedPoint.X = carvedPoint.X And markedPoint.Y = carvedPoint.Y Then
                     markedPointsToRemove.Add(markedPoint)
                     Continue For 'the carved point has been found so no need to iterate through other marked points
@@ -40,10 +40,10 @@ Public Class Utility
     End Sub
 
     Public Shared Function GetCommonPoints(ByVal carvedPoints As List(Of Point), markedPoints As List(Of Point)) As List(Of Point)
-
         Dim commonPoints = New List(Of Point)
-        For Each carvedPoint In carvedPoints 'removes the carved cells from the marked points
-            For Each markedPoint In markedPoints
+
+        For Each markedPoint In markedPoints
+            For Each carvedPoint In carvedPoints 'removes the carved cells from the marked points
                 If markedPoint.X = carvedPoint.X And markedPoint.Y = carvedPoint.Y Then
                     commonPoints.Add(markedPoint)
                     Continue For 'the carved point has been found so no need to iterate through other marked points
