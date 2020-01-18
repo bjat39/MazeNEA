@@ -23,14 +23,35 @@ Public Class Utility
         Return adjacentPoints
     End Function
 
-    Public Shared Sub RemoveCarvedPoints(carvedPoints As List(Of Point), markedPoints As List(Of Point))
+    Public Shared Sub ExcludePointsInFirstList(ByVal carvedPoints As List(Of Point), markedPoints As List(Of Point))
+
+        Dim markedPointsToRemove = New List(Of Point)
         For Each carvedPoint In carvedPoints 'removes the carved cells from the marked points
-            Dim foundPoint = markedPoints.Find(Function(p) p.X = carvedPoint.X And p.Y = carvedPoint.Y)
-            If (foundPoint IsNot Nothing) Then
-                markedPoints.Remove(foundPoint)
-            End If
+            For Each markedPoint In markedPoints
+                If markedPoint.X = carvedPoint.X And markedPoint.Y = carvedPoint.Y Then
+                    markedPointsToRemove.Add(markedPoint)
+                    Continue For 'the carved point has been found so no need to iterate through other marked points
+                End If
+            Next
+        Next
+        For Each markedPoint In markedPointsToRemove
+            markedPoints.Remove(markedPoint)
         Next
     End Sub
+
+    Public Shared Function GetCommonPoints(ByVal carvedPoints As List(Of Point), markedPoints As List(Of Point)) As List(Of Point)
+
+        Dim commonPoints = New List(Of Point)
+        For Each carvedPoint In carvedPoints 'removes the carved cells from the marked points
+            For Each markedPoint In markedPoints
+                If markedPoint.X = carvedPoint.X And markedPoint.Y = carvedPoint.Y Then
+                    commonPoints.Add(markedPoint)
+                    Continue For 'the carved point has been found so no need to iterate through other marked points
+                End If
+            Next
+        Next
+        Return commonPoints
+    End Function
 
     Public Shared Sub RemoveParent(parent As Point, children As List(Of Point))
         Dim foundPoint = children.Find(Function(p) p.X = parent.X And p.Y = parent.Y)

@@ -54,7 +54,7 @@ Partial Class MazeCustomisation
         Me.Width.Location = New System.Drawing.Point(12, 9)
         Me.Width.Name = "Width"
         Me.Width.Size = New System.Drawing.Size(35, 13)
-        Me.Width.TabIndex = 0
+        Me.Width.TabIndex = 13
         Me.Width.Text = "Width"
         '
         'Height
@@ -63,7 +63,7 @@ Partial Class MazeCustomisation
         Me.Height.Location = New System.Drawing.Point(12, 48)
         Me.Height.Name = "Height"
         Me.Height.Size = New System.Drawing.Size(38, 13)
-        Me.Height.TabIndex = 2
+        Me.Height.TabIndex = 14
         Me.Height.Text = "Height"
         '
         'Seed
@@ -72,7 +72,7 @@ Partial Class MazeCustomisation
         Me.Seed.Location = New System.Drawing.Point(12, 87)
         Me.Seed.Name = "Seed"
         Me.Seed.Size = New System.Drawing.Size(32, 13)
-        Me.Seed.TabIndex = 4
+        Me.Seed.TabIndex = 15
         Me.Seed.Text = "Seed"
         '
         'GenerateButton
@@ -80,7 +80,7 @@ Partial Class MazeCustomisation
         Me.GenerateButton.Location = New System.Drawing.Point(15, 379)
         Me.GenerateButton.Name = "GenerateButton"
         Me.GenerateButton.Size = New System.Drawing.Size(140, 59)
-        Me.GenerateButton.TabIndex = 6
+        Me.GenerateButton.TabIndex = 12
         Me.GenerateButton.Text = "Generate"
         Me.GenerateButton.UseVisualStyleBackColor = true
         '
@@ -89,21 +89,21 @@ Partial Class MazeCustomisation
         Me.MazeWidth.Location = New System.Drawing.Point(15, 25)
         Me.MazeWidth.Name = "MazeWidth"
         Me.MazeWidth.Size = New System.Drawing.Size(140, 20)
-        Me.MazeWidth.TabIndex = 7
+        Me.MazeWidth.TabIndex = 0
         '
         'MazeHeight
         '
         Me.MazeHeight.Location = New System.Drawing.Point(15, 64)
         Me.MazeHeight.Name = "MazeHeight"
         Me.MazeHeight.Size = New System.Drawing.Size(140, 20)
-        Me.MazeHeight.TabIndex = 8
+        Me.MazeHeight.TabIndex = 1
         '
         'MazeSeed
         '
         Me.MazeSeed.Location = New System.Drawing.Point(15, 103)
         Me.MazeSeed.Name = "MazeSeed"
         Me.MazeSeed.Size = New System.Drawing.Size(140, 20)
-        Me.MazeSeed.TabIndex = 9
+        Me.MazeSeed.TabIndex = 2
         '
         'Algorithm
         '
@@ -111,7 +111,7 @@ Partial Class MazeCustomisation
         Me.Algorithm.Location = New System.Drawing.Point(15, 168)
         Me.Algorithm.Name = "Algorithm"
         Me.Algorithm.Size = New System.Drawing.Size(140, 21)
-        Me.Algorithm.TabIndex = 10
+        Me.Algorithm.TabIndex = 4
         '
         'AlgorithmLabel
         '
@@ -119,7 +119,7 @@ Partial Class MazeCustomisation
         Me.AlgorithmLabel.Location = New System.Drawing.Point(12, 152)
         Me.AlgorithmLabel.Name = "AlgorithmLabel"
         Me.AlgorithmLabel.Size = New System.Drawing.Size(50, 13)
-        Me.AlgorithmLabel.TabIndex = 11
+        Me.AlgorithmLabel.TabIndex = 16
         Me.AlgorithmLabel.Text = "Algorithm"
         '
         'RandomSeed
@@ -127,7 +127,7 @@ Partial Class MazeCustomisation
         Me.RandomSeed.Location = New System.Drawing.Point(15, 129)
         Me.RandomSeed.Name = "RandomSeed"
         Me.RandomSeed.Size = New System.Drawing.Size(140, 20)
-        Me.RandomSeed.TabIndex = 12
+        Me.RandomSeed.TabIndex = 3
         Me.RandomSeed.Text = "Random Seed"
         Me.RandomSeed.UseVisualStyleBackColor = true
         '
@@ -139,14 +139,14 @@ Partial Class MazeCustomisation
         Me.MazeGrid.Location = New System.Drawing.Point(161, 12)
         Me.MazeGrid.Name = "MazeGrid"
         Me.MazeGrid.Size = New System.Drawing.Size(450, 426)
-        Me.MazeGrid.TabIndex = 13
+        Me.MazeGrid.TabIndex = 17
         '
         'ToggleSolution
         '
         Me.ToggleSolution.Location = New System.Drawing.Point(15, 196)
         Me.ToggleSolution.Name = "ToggleSolution"
         Me.ToggleSolution.Size = New System.Drawing.Size(140, 23)
-        Me.ToggleSolution.TabIndex = 14
+        Me.ToggleSolution.TabIndex = 5
         Me.ToggleSolution.Text = "Toggle Solution"
         Me.ToggleSolution.UseVisualStyleBackColor = true
         '
@@ -155,7 +155,7 @@ Partial Class MazeCustomisation
         Me.SaveMazeButton.Location = New System.Drawing.Point(15, 254)
         Me.SaveMazeButton.Name = "SaveMazeButton"
         Me.SaveMazeButton.Size = New System.Drawing.Size(140, 23)
-        Me.SaveMazeButton.TabIndex = 15
+        Me.SaveMazeButton.TabIndex = 7
         Me.SaveMazeButton.Text = "Save Maze"
         Me.SaveMazeButton.UseVisualStyleBackColor = true
         '
@@ -164,7 +164,7 @@ Partial Class MazeCustomisation
         Me.LoadMazeButton.Location = New System.Drawing.Point(15, 225)
         Me.LoadMazeButton.Name = "LoadMazeButton"
         Me.LoadMazeButton.Size = New System.Drawing.Size(140, 23)
-        Me.LoadMazeButton.TabIndex = 16
+        Me.LoadMazeButton.TabIndex = 6
         Me.LoadMazeButton.Text = "Load Maze"
         Me.LoadMazeButton.UseVisualStyleBackColor = true
         '
@@ -177,7 +177,7 @@ Partial Class MazeCustomisation
         Me.GoWest.Location = New System.Drawing.Point(37, 312)
         Me.GoWest.Name = "GoWest"
         Me.GoWest.Size = New System.Drawing.Size(42, 23)
-        Me.GoWest.TabIndex = 17
+        Me.GoWest.TabIndex = 8
         Me.GoWest.Text = "West"
         Me.GoWest.UseVisualStyleBackColor = true
         '
@@ -186,7 +186,7 @@ Partial Class MazeCustomisation
         Me.GoNorth.Location = New System.Drawing.Point(61, 283)
         Me.GoNorth.Name = "GoNorth"
         Me.GoNorth.Size = New System.Drawing.Size(50, 23)
-        Me.GoNorth.TabIndex = 18
+        Me.GoNorth.TabIndex = 9
         Me.GoNorth.Text = "North"
         Me.GoNorth.UseVisualStyleBackColor = true
         '
@@ -195,7 +195,7 @@ Partial Class MazeCustomisation
         Me.GoEast.Location = New System.Drawing.Point(98, 312)
         Me.GoEast.Name = "GoEast"
         Me.GoEast.Size = New System.Drawing.Size(39, 23)
-        Me.GoEast.TabIndex = 19
+        Me.GoEast.TabIndex = 10
         Me.GoEast.Text = "East"
         Me.GoEast.UseVisualStyleBackColor = true
         '
@@ -204,7 +204,7 @@ Partial Class MazeCustomisation
         Me.GoSouth.Location = New System.Drawing.Point(61, 341)
         Me.GoSouth.Name = "GoSouth"
         Me.GoSouth.Size = New System.Drawing.Size(50, 23)
-        Me.GoSouth.TabIndex = 20
+        Me.GoSouth.TabIndex = 11
         Me.GoSouth.Text = "South"
         Me.GoSouth.UseVisualStyleBackColor = true
         '

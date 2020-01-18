@@ -11,7 +11,7 @@ Friend Class RecursiveBacktracker
         Dim carvedPoints = New List(Of Point)
         Do While carvedPoints.Count < x * y
             Dim markedPoints = Utility.GetAdjacentPoints(currentPosition, x, y)
-            Utility.RemoveCarvedPoints(carvedPoints, markedPoints)
+            Utility.ExcludePointsInFirstList(carvedPoints, markedPoints)
             If markedPoints.Count > 0 Then
                 Dim pointToCarve = markedPoints.Item(randomNumber.Next(0, markedPoints.Count))
                 Dim currentCell = maze.GetCell(currentPosition)
