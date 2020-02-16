@@ -13,11 +13,11 @@ Public Class MazeCustomisation
     Private Sub GenerateButton_Click(sender As Object, e As EventArgs) Handles GenerateButton.Click
         Dim m As Generate = New Generate()
         Dim startTime As DateTime = DateTime.Now
-        Dim mazeXml = m.InitialiseGrid(MazeWidth.Value, MazeHeight.Value, MazeSeed.Value, Algorithm.SelectedIndex)
+        Dim mazeXml = m.InitialiseGrid(MazeWidth.Value, MazeHeight.Value, MazeSeed.Value, GenerationAlgorithm.SelectedIndex)
         Dim endTime As DateTime = DateTime.Now
         Dim duration As TimeSpan = endTime - startTime
         MazeModel = Utility.ConvertXMLToMaze(mazeXml)
-        Dim mazeSolver = New Solve()
+        Dim mazeSolver = New BreadthFirstSearchSolver()
         Solution = mazeSolver.SolveMaze(mazeXml, New Point(0, 0), New Point(MazeModel.Width - 1, MazeModel.Height - 1))
         SetCellSize()
         ExitPoint = New Point(MazeModel.Width, MazeModel.Height)
@@ -43,10 +43,13 @@ Public Class MazeCustomisation
     End Sub
 
     Private Sub MazeCustomisation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Algorithm.Items.Add("Prim's Algorithm")
-        Algorithm.Items.Add("Recursive Backtracker")
-        Algorithm.Items.Add("Recursive Division")
-        Algorithm.SelectedIndex = 0
+        GenerationAlgorithm.Items.Add("Prim's Algorithm")
+        GenerationAlgorithm.Items.Add("Recursive Backtracker")
+        GenerationAlgorithm.Items.Add("Recursive Division")
+        GenerationAlgorithm.SelectedIndex = 0
+
+        SolvingAlgorithm.Items.Add("Breadth First Search")
+        SolvingAlgorithm.Items.Add("Trémaux's Algorithm")
 
         MazeHeight.Value = 10
         MazeWidth.Value = 10

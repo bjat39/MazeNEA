@@ -88,7 +88,7 @@
     <Compile Include="PrimsAlgorithm.vb" />
     <Compile Include="RecursiveBacktracker.vb" />
     <Compile Include="RecursiveDivision.vb" />
-    <Compile Include="Solve.vb" />
+    <Compile Include="BreadthFirstSearchSolver.vb" />
     <Compile Include="Utility.vb" />
   </ItemGroup>
   <ItemGroup>

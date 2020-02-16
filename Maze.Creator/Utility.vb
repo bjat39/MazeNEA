@@ -181,7 +181,7 @@ Public Class Utility
     End Function
 
     Public Shared Function FindPath(mazeToSolve As Creator.Maze) As List(Of Point)
-        Dim solver = New Solve()
+        Dim solver = New BreadthFirstSearchSolver()
         Dim solution = solver.SolveMaze(mazeToSolve, New Point(0, 0), New Point(mazeToSolve.Width - 1, mazeToSolve.Width - 1))
         If solution Is Nothing Or solution.Count = 0 Then
             Console.WriteLine("no solution")

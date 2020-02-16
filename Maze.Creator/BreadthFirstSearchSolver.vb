@@ -1,6 +1,6 @@
 ﻿Imports Maze.Creator
 
-Public Class Solve
+Public Class BreadthFirstSearchSolver
     Implements IMazeSolver
 
     Public Function SolveMaze(mazeXML As String, startPoint As Point, endPoint As Point) As List(Of Point) Implements IMazeSolver.SolveMaze

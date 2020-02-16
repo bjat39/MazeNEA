@@ -22,15 +22,15 @@ Partial Class MazeCustomisation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Width = New System.Windows.Forms.Label()
-        Me.Height = New System.Windows.Forms.Label()
+        Me.WidthLabel = New System.Windows.Forms.Label()
+        Me.HeightLabel = New System.Windows.Forms.Label()
         Me.Seed = New System.Windows.Forms.Label()
         Me.GenerateButton = New System.Windows.Forms.Button()
         Me.MazeWidth = New System.Windows.Forms.NumericUpDown()
         Me.MazeHeight = New System.Windows.Forms.NumericUpDown()
         Me.MazeSeed = New System.Windows.Forms.NumericUpDown()
-        Me.Algorithm = New System.Windows.Forms.ComboBox()
-        Me.AlgorithmLabel = New System.Windows.Forms.Label()
+        Me.GenerationAlgorithm = New System.Windows.Forms.ComboBox()
+        Me.GenerationAlgorithmLabel = New System.Windows.Forms.Label()
         Me.RandomSeed = New System.Windows.Forms.Button()
         Me.MazeGrid = New System.Windows.Forms.Panel()
         Me.ToggleSolution = New System.Windows.Forms.Button()
@@ -46,30 +46,32 @@ Partial Class MazeCustomisation
         Me.PathLength = New System.Windows.Forms.Label()
         Me.TimeTaken = New System.Windows.Forms.Label()
         Me.MazeSize = New System.Windows.Forms.Label()
+        Me.SolvingAlgorithmLabel = New System.Windows.Forms.Label()
+        Me.SolvingAlgorithm = New System.Windows.Forms.ComboBox()
         CType(Me.MazeWidth,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeHeight,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeSeed,System.ComponentModel.ISupportInitialize).BeginInit
         Me.Statistics.SuspendLayout
         Me.SuspendLayout
         '
-        'Width
+        'WidthLabel
         '
-        Me.Width.AutoSize = true
-        Me.Width.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Width.Location = New System.Drawing.Point(12, 9)
-        Me.Width.Name = "Width"
-        Me.Width.Size = New System.Drawing.Size(35, 13)
-        Me.Width.TabIndex = 13
-        Me.Width.Text = "Width"
+        Me.WidthLabel.AutoSize = true
+        Me.WidthLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.WidthLabel.Location = New System.Drawing.Point(12, 9)
+        Me.WidthLabel.Name = "WidthLabel"
+        Me.WidthLabel.Size = New System.Drawing.Size(35, 13)
+        Me.WidthLabel.TabIndex = 13
+        Me.WidthLabel.Text = "Width"
         '
-        'Height
+        'HeightLabel
         '
-        Me.Height.AutoSize = true
-        Me.Height.Location = New System.Drawing.Point(12, 38)
-        Me.Height.Name = "Height"
-        Me.Height.Size = New System.Drawing.Size(38, 13)
-        Me.Height.TabIndex = 14
-        Me.Height.Text = "Height"
+        Me.HeightLabel.AutoSize = true
+        Me.HeightLabel.Location = New System.Drawing.Point(12, 38)
+        Me.HeightLabel.Name = "HeightLabel"
+        Me.HeightLabel.Size = New System.Drawing.Size(38, 13)
+        Me.HeightLabel.TabIndex = 14
+        Me.HeightLabel.Text = "Height"
         '
         'Seed
         '
@@ -82,7 +84,7 @@ Partial Class MazeCustomisation
         '
         'GenerateButton
         '
-        Me.GenerateButton.Location = New System.Drawing.Point(15, 408)
+        Me.GenerateButton.Location = New System.Drawing.Point(15, 532)
         Me.GenerateButton.Name = "GenerateButton"
         Me.GenerateButton.Size = New System.Drawing.Size(140, 30)
         Me.GenerateButton.TabIndex = 12
@@ -110,22 +112,22 @@ Partial Class MazeCustomisation
         Me.MazeSeed.Size = New System.Drawing.Size(102, 20)
         Me.MazeSeed.TabIndex = 2
         '
-        'Algorithm
+        'GenerationAlgorithm
         '
-        Me.Algorithm.FormattingEnabled = true
-        Me.Algorithm.Location = New System.Drawing.Point(15, 127)
-        Me.Algorithm.Name = "Algorithm"
-        Me.Algorithm.Size = New System.Drawing.Size(140, 21)
-        Me.Algorithm.TabIndex = 4
+        Me.GenerationAlgorithm.FormattingEnabled = true
+        Me.GenerationAlgorithm.Location = New System.Drawing.Point(15, 127)
+        Me.GenerationAlgorithm.Name = "GenerationAlgorithm"
+        Me.GenerationAlgorithm.Size = New System.Drawing.Size(140, 21)
+        Me.GenerationAlgorithm.TabIndex = 4
         '
-        'AlgorithmLabel
+        'GenerationAlgorithmLabel
         '
-        Me.AlgorithmLabel.AutoSize = true
-        Me.AlgorithmLabel.Location = New System.Drawing.Point(12, 111)
-        Me.AlgorithmLabel.Name = "AlgorithmLabel"
-        Me.AlgorithmLabel.Size = New System.Drawing.Size(50, 13)
-        Me.AlgorithmLabel.TabIndex = 16
-        Me.AlgorithmLabel.Text = "Algorithm"
+        Me.GenerationAlgorithmLabel.AutoSize = true
+        Me.GenerationAlgorithmLabel.Location = New System.Drawing.Point(12, 111)
+        Me.GenerationAlgorithmLabel.Name = "GenerationAlgorithmLabel"
+        Me.GenerationAlgorithmLabel.Size = New System.Drawing.Size(105, 13)
+        Me.GenerationAlgorithmLabel.TabIndex = 16
+        Me.GenerationAlgorithmLabel.Text = "Generation Algorithm"
         '
         'RandomSeed
         '
@@ -143,12 +145,12 @@ Partial Class MazeCustomisation
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.MazeGrid.Location = New System.Drawing.Point(161, 12)
         Me.MazeGrid.Name = "MazeGrid"
-        Me.MazeGrid.Size = New System.Drawing.Size(450, 426)
+        Me.MazeGrid.Size = New System.Drawing.Size(550, 550)
         Me.MazeGrid.TabIndex = 17
         '
         'ToggleSolution
         '
-        Me.ToggleSolution.Location = New System.Drawing.Point(15, 154)
+        Me.ToggleSolution.Location = New System.Drawing.Point(15, 194)
         Me.ToggleSolution.Name = "ToggleSolution"
         Me.ToggleSolution.Size = New System.Drawing.Size(140, 23)
         Me.ToggleSolution.TabIndex = 5
@@ -157,7 +159,7 @@ Partial Class MazeCustomisation
         '
         'SaveMazeButton
         '
-        Me.SaveMazeButton.Location = New System.Drawing.Point(85, 183)
+        Me.SaveMazeButton.Location = New System.Drawing.Point(85, 223)
         Me.SaveMazeButton.Name = "SaveMazeButton"
         Me.SaveMazeButton.Size = New System.Drawing.Size(70, 23)
         Me.SaveMazeButton.TabIndex = 7
@@ -166,7 +168,7 @@ Partial Class MazeCustomisation
         '
         'LoadMazeButton
         '
-        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 183)
+        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 223)
         Me.LoadMazeButton.Name = "LoadMazeButton"
         Me.LoadMazeButton.Size = New System.Drawing.Size(64, 23)
         Me.LoadMazeButton.TabIndex = 6
@@ -179,7 +181,7 @@ Partial Class MazeCustomisation
         '
         'GoWest
         '
-        Me.GoWest.Location = New System.Drawing.Point(53, 241)
+        Me.GoWest.Location = New System.Drawing.Point(48, 370)
         Me.GoWest.Name = "GoWest"
         Me.GoWest.Size = New System.Drawing.Size(18, 23)
         Me.GoWest.TabIndex = 8
@@ -188,7 +190,7 @@ Partial Class MazeCustomisation
         '
         'GoNorth
         '
-        Me.GoNorth.Location = New System.Drawing.Point(72, 212)
+        Me.GoNorth.Location = New System.Drawing.Point(67, 341)
         Me.GoNorth.Name = "GoNorth"
         Me.GoNorth.Size = New System.Drawing.Size(18, 23)
         Me.GoNorth.TabIndex = 9
@@ -197,7 +199,7 @@ Partial Class MazeCustomisation
         '
         'GoEast
         '
-        Me.GoEast.Location = New System.Drawing.Point(90, 241)
+        Me.GoEast.Location = New System.Drawing.Point(85, 370)
         Me.GoEast.Name = "GoEast"
         Me.GoEast.Size = New System.Drawing.Size(18, 23)
         Me.GoEast.TabIndex = 10
@@ -206,7 +208,7 @@ Partial Class MazeCustomisation
         '
         'GoSouth
         '
-        Me.GoSouth.Location = New System.Drawing.Point(72, 270)
+        Me.GoSouth.Location = New System.Drawing.Point(67, 399)
         Me.GoSouth.Name = "GoSouth"
         Me.GoSouth.Size = New System.Drawing.Size(18, 23)
         Me.GoSouth.TabIndex = 11
@@ -218,7 +220,7 @@ Partial Class MazeCustomisation
         Me.Statistics.Controls.Add(Me.PathLength)
         Me.Statistics.Controls.Add(Me.TimeTaken)
         Me.Statistics.Controls.Add(Me.MazeSize)
-        Me.Statistics.Location = New System.Drawing.Point(15, 301)
+        Me.Statistics.Location = New System.Drawing.Point(15, 425)
         Me.Statistics.Name = "Statistics"
         Me.Statistics.Size = New System.Drawing.Size(140, 101)
         Me.Statistics.TabIndex = 18
@@ -252,11 +254,30 @@ Partial Class MazeCustomisation
         Me.MazeSize.TabIndex = 0
         Me.MazeSize.Text = "MazeSize"
         '
+        'SolvingAlgorithmLabel
+        '
+        Me.SolvingAlgorithmLabel.AutoSize = true
+        Me.SolvingAlgorithmLabel.Location = New System.Drawing.Point(12, 151)
+        Me.SolvingAlgorithmLabel.Name = "SolvingAlgorithmLabel"
+        Me.SolvingAlgorithmLabel.Size = New System.Drawing.Size(88, 13)
+        Me.SolvingAlgorithmLabel.TabIndex = 20
+        Me.SolvingAlgorithmLabel.Text = "Solving Algorithm"
+        '
+        'SolvingAlgorithm
+        '
+        Me.SolvingAlgorithm.FormattingEnabled = true
+        Me.SolvingAlgorithm.Location = New System.Drawing.Point(15, 167)
+        Me.SolvingAlgorithm.Name = "SolvingAlgorithm"
+        Me.SolvingAlgorithm.Size = New System.Drawing.Size(140, 21)
+        Me.SolvingAlgorithm.TabIndex = 21
+        '
         'MazeCustomisation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(623, 450)
+        Me.ClientSize = New System.Drawing.Size(723, 582)
+        Me.Controls.Add(Me.SolvingAlgorithm)
+        Me.Controls.Add(Me.SolvingAlgorithmLabel)
         Me.Controls.Add(Me.SaveMazeButton)
         Me.Controls.Add(Me.GoSouth)
         Me.Controls.Add(Me.GoEast)
@@ -266,15 +287,15 @@ Partial Class MazeCustomisation
         Me.Controls.Add(Me.ToggleSolution)
         Me.Controls.Add(Me.MazeGrid)
         Me.Controls.Add(Me.RandomSeed)
-        Me.Controls.Add(Me.AlgorithmLabel)
-        Me.Controls.Add(Me.Algorithm)
+        Me.Controls.Add(Me.GenerationAlgorithmLabel)
+        Me.Controls.Add(Me.GenerationAlgorithm)
         Me.Controls.Add(Me.MazeSeed)
         Me.Controls.Add(Me.MazeHeight)
         Me.Controls.Add(Me.MazeWidth)
         Me.Controls.Add(Me.GenerateButton)
         Me.Controls.Add(Me.Seed)
-        Me.Controls.Add(Me.Height)
-        Me.Controls.Add(Me.Width)
+        Me.Controls.Add(Me.HeightLabel)
+        Me.Controls.Add(Me.WidthLabel)
         Me.Controls.Add(Me.Statistics)
         Me.Name = "MazeCustomisation"
         Me.Text = "MazeCustomisation"
@@ -288,15 +309,15 @@ Partial Class MazeCustomisation
 
 End Sub
 
-    Friend WithEvents Width As Label
-    Friend WithEvents Height As Label
+    Friend WithEvents WidthLabel As Label
+    Friend WithEvents HeightLabel As Label
     Friend WithEvents Seed As Label
     Friend WithEvents GenerateButton As Button
     Friend WithEvents MazeWidth As NumericUpDown
     Friend WithEvents MazeHeight As NumericUpDown
     Friend WithEvents MazeSeed As NumericUpDown
-    Friend WithEvents Algorithm As ComboBox
-    Friend WithEvents AlgorithmLabel As Label
+    Friend WithEvents GenerationAlgorithm As ComboBox
+    Friend WithEvents GenerationAlgorithmLabel As Label
     Friend WithEvents RandomSeed As Button
     Friend WithEvents MazeGrid As Panel
     Friend WithEvents ToggleSolution As Button
@@ -312,4 +333,6 @@ End Sub
     Friend WithEvents MazeSize As Label
     Friend WithEvents TimeTaken As Label
     Friend WithEvents PathLength As Label
+    Friend WithEvents SolvingAlgorithmLabel As Label
+    Friend WithEvents SolvingAlgorithm As ComboBox
 End Class
