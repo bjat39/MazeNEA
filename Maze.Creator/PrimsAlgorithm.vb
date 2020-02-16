@@ -6,8 +6,10 @@
         Dim maze As Maze = New Maze(x, y, seed, algorithm)
         Dim frontierPoints = New List(Of Point)
         Dim carvedPoints = New List(Of Point)
-
-        Dim currentPosition As Point = New Point(0, 0)
+        
+        Dim startX = randomNumber.Next(0, x)
+        Dim startY = randomNumber.Next(0, y)
+        Dim currentPosition As Point = New Point(startX, startY)
         carvedPoints.Add(currentPosition)
         Dim adjacentPoints = Utility.GetAdjacentPoints(currentPosition, x, y)
         frontierPoints.AddRange(adjacentPoints)
