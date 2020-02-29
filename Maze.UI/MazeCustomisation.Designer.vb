@@ -48,6 +48,8 @@ Partial Class MazeCustomisation
         Me.MazeSize = New System.Windows.Forms.Label()
         Me.SolvingAlgorithmLabel = New System.Windows.Forms.Label()
         Me.SolvingAlgorithm = New System.Windows.Forms.ComboBox()
+        Me.CheckVisited = New System.Windows.Forms.CheckBox()
+        Me.EndlessModePlay = New System.Windows.Forms.Button()
         CType(Me.MazeWidth,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeHeight,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.MazeSeed,System.ComponentModel.ISupportInitialize).BeginInit
@@ -159,7 +161,7 @@ Partial Class MazeCustomisation
         '
         'SaveMazeButton
         '
-        Me.SaveMazeButton.Location = New System.Drawing.Point(85, 223)
+        Me.SaveMazeButton.Location = New System.Drawing.Point(85, 246)
         Me.SaveMazeButton.Name = "SaveMazeButton"
         Me.SaveMazeButton.Size = New System.Drawing.Size(70, 23)
         Me.SaveMazeButton.TabIndex = 7
@@ -168,7 +170,7 @@ Partial Class MazeCustomisation
         '
         'LoadMazeButton
         '
-        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 223)
+        Me.LoadMazeButton.Location = New System.Drawing.Point(15, 246)
         Me.LoadMazeButton.Name = "LoadMazeButton"
         Me.LoadMazeButton.Size = New System.Drawing.Size(64, 23)
         Me.LoadMazeButton.TabIndex = 6
@@ -271,11 +273,32 @@ Partial Class MazeCustomisation
         Me.SolvingAlgorithm.Size = New System.Drawing.Size(140, 21)
         Me.SolvingAlgorithm.TabIndex = 21
         '
+        'CheckVisited
+        '
+        Me.CheckVisited.AutoSize = true
+        Me.CheckVisited.Location = New System.Drawing.Point(15, 223)
+        Me.CheckVisited.Name = "CheckVisited"
+        Me.CheckVisited.Size = New System.Drawing.Size(87, 17)
+        Me.CheckVisited.TabIndex = 22
+        Me.CheckVisited.Text = "Show Visited"
+        Me.CheckVisited.UseVisualStyleBackColor = true
+        '
+        'EndlessModePlay
+        '
+        Me.EndlessModePlay.Location = New System.Drawing.Point(15, 276)
+        Me.EndlessModePlay.Name = "EndlessModePlay"
+        Me.EndlessModePlay.Size = New System.Drawing.Size(140, 23)
+        Me.EndlessModePlay.TabIndex = 23
+        Me.EndlessModePlay.Text = "Endless"
+        Me.EndlessModePlay.UseVisualStyleBackColor = true
+        '
         'MazeCustomisation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(723, 582)
+        Me.Controls.Add(Me.EndlessModePlay)
+        Me.Controls.Add(Me.CheckVisited)
         Me.Controls.Add(Me.SolvingAlgorithm)
         Me.Controls.Add(Me.SolvingAlgorithmLabel)
         Me.Controls.Add(Me.SaveMazeButton)
@@ -335,4 +358,6 @@ End Sub
     Friend WithEvents PathLength As Label
     Friend WithEvents SolvingAlgorithmLabel As Label
     Friend WithEvents SolvingAlgorithm As ComboBox
+    Friend WithEvents CheckVisited As CheckBox
+    Friend WithEvents EndlessModePlay As Button
 End Class

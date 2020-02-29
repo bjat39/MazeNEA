@@ -4,7 +4,7 @@ Imports System.Xml
 Imports System.Xml.Serialization
 
 Public Enum MazeGenerationAlgorithms
-    PrimsAlgorithm
+    Prims
     RecursiveBacktracker
     RecursiveDivision
 End Enum
@@ -15,8 +15,8 @@ Public Class Generate
         Dim writer As TextWriter = New StringWriter()
         Dim gen As IMazeGenerator
         Select Case algo
-            Case MazeGenerationAlgorithms.PrimsAlgorithm
-                gen = New PrimsAlgorithm()
+            Case MazeGenerationAlgorithms.Prims
+                gen = New Prims()
             Case MazeGenerationAlgorithms.RecursiveBacktracker
                 gen = New RecursiveBacktracker()
             Case MazeGenerationAlgorithms.RecursiveDivision

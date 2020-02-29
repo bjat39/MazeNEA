@@ -9,7 +9,7 @@ Module TestMazes
         'generates a maze
 
 
-        Dim returnedMaze1 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.PrimsAlgorithm)
+        Dim returnedMaze1 As Creator.Maze = GenerateMaze(MazeGenerationAlgorithms.Prims)
         Dim solution1 As List(Of Point) = Utility.FindPath(returnedMaze1)
         Console.WriteLine("Prims")
         Utility.DisplayAsciiMaze(returnedMaze1, solution1)

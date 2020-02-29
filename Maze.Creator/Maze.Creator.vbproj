@@ -85,10 +85,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Point.vb" />
-    <Compile Include="PrimsAlgorithm.vb" />
+    <Compile Include="Prims.vb" />
     <Compile Include="RecursiveBacktracker.vb" />
     <Compile Include="RecursiveDivision.vb" />
     <Compile Include="BreadthFirstSearchSolver.vb" />
+    <Compile Include="Solver.vb" />
+    <Compile Include="Tremaux.vb" />
     <Compile Include="Utility.vb" />
   </ItemGroup>
   <ItemGroup>

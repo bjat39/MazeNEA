@@ -9,26 +9,35 @@ Public Class MazeCustomisation
     Dim ShowSolution As Boolean = False
     Dim UserLocation As Point = New Point(0, 0)
     Dim ExitPoint As Point
+    Dim MazeXML As String
+    Dim Visited As List(Of Point)
+    Dim EndlessMode As Boolean = False
 
     Private Sub GenerateButton_Click(sender As Object, e As EventArgs) Handles GenerateButton.Click
-        Dim m As Generate = New Generate()
-        Dim startTime As DateTime = DateTime.Now
-        Dim mazeXml = m.InitialiseGrid(MazeWidth.Value, MazeHeight.Value, MazeSeed.Value, GenerationAlgorithm.SelectedIndex)
-        Dim endTime As DateTime = DateTime.Now
-        Dim duration As TimeSpan = endTime - startTime
-        MazeModel = Utility.ConvertXMLToMaze(mazeXml)
-        Dim mazeSolver = New BreadthFirstSearchSolver()
-        Solution = mazeSolver.SolveMaze(mazeXml, New Point(0, 0), New Point(MazeModel.Width - 1, MazeModel.Height - 1))
-        SetCellSize()
-        ExitPoint = New Point(MazeModel.Width, MazeModel.Height)
-        MazeSize.Text = $"no. cells = {MazeModel.Height * MazeModel.Width}"
-        TimeTaken.Text = $"maze gen took {CInt(duration.TotalMilliseconds)} ms"
-        PathLength.Text = $"shortest path is {Solution.Count - 1} cells"
-        
+        GenerateMaze()
         'Debug.WriteLine($"Cell width = {CellWidth}")
         'Debug.WriteLine($"Cell height = {CellHeight}")
         'Debug.WriteLine($"Cell size = {CellSize}")
         'Debug.WriteLine($"Maze Grid = {MazeGrid.Width}, {MazeGrid.Height}")
+    End Sub
+
+    Private Sub GenerateMaze()
+        Dim m As Generate = New Generate()
+        Dim startTime As DateTime = DateTime.Now
+        MazeXML = m.InitialiseGrid(MazeWidth.Value, MazeHeight.Value, MazeSeed.Value, GenerationAlgorithm.SelectedIndex)
+        Dim endTime As DateTime = DateTime.Now
+        Dim generateDuration As TimeSpan = endTime - startTime
+        MazeModel = Utility.ConvertXMLToMaze(MazeXML)
+
+        Dim mazeSolver = Solver.CreateSolver(SolvingAlgorithm.SelectedIndex)
+        ExitPoint = New Point(MazeModel.Width - 1, MazeModel.Height - 1)
+        Solution = mazeSolver.SolveMaze(MazeXML, New Point(0, 0), ExitPoint)
+        Visited = mazeSolver.VisitedPoints
+
+        SetCellSize()
+        MazeSize.Text = $"no. cells = {MazeModel.Height * MazeModel.Width}"
+        TimeTaken.Text = $"maze gen took {CInt(generateDuration.TotalMilliseconds)} ms"
+        PathLength.Text = $"path is {Solution.Count - 1} cells"
         Me.Refresh()
     End Sub
 
@@ -50,6 +59,7 @@ Public Class MazeCustomisation
 
         SolvingAlgorithm.Items.Add("Breadth First Search")
         SolvingAlgorithm.Items.Add("Trémaux's Algorithm")
+        SolvingAlgorithm.SelectedIndex = 0
 
         MazeHeight.Value = 10
         MazeWidth.Value = 10
@@ -80,12 +90,12 @@ Public Class MazeCustomisation
         'Debug.WriteLine($"Paint: {e.ClipRectangle.ToString()}")
         If MazeModel IsNot Nothing Then
             Dim pen = New Pen(Color.Black)
-            Dim size = CellSize
+            Dim size = CellSize 'dimensions of height and width of cells
             For x = 0 To MazeModel.Width - 1
                 For y = 0 To MazeModel.Height - 1
                     Dim cell As Cell = MazeModel.GetCell(x, y)
                     If cell.NorthWall = True Then
-                        e.Graphics.DrawLine(pen, x * size, y * size, (x + 1) * size, y * size)
+                        e.Graphics.DrawLine(pen, x * size, y * size, (x + 1) * size, y * size) 'draws a line connecting the two points
                     End If
                     If cell.WestWall = True Then
                         e.Graphics.DrawLine(pen, x * size, y * size, x * size, (y + 1) * size)
@@ -102,6 +112,10 @@ Public Class MazeCustomisation
                     End If
                 Next
             Next
+            Dim fontSize As Integer = Math.Floor(size / 2)
+            Dim drawFont As Font = New Font("Arial", fontSize, FontStyle.Bold)
+            Dim drawBrush As SolidBrush = New SolidBrush(Color.Green)
+            Dim greyBrush As SolidBrush = New SolidBrush(Color.Gray)
             If ShowSolution = True Then
                 Dim firstPoint As Point
                 Dim secondPoint As Point
@@ -117,10 +131,15 @@ Public Class MazeCustomisation
                     End If
                     firstPoint = secondPoint
                 Next
+                If CheckVisited.Checked Then
+                    For Each visit In Visited
+                        Dim visitX As Integer = visit.X * size + size / 8
+                        Dim visitY As Integer = visit.Y * size + size / 8
+                        Dim visitedPoint As PointF = New PointF(visitX, visitY)
+                        e.Graphics.DrawString("x", drawFont, greyBrush, visitedPoint)
+                    Next
+                End If
             End If
-            Dim fontSize As Integer = Math.Floor(size / 2)
-            Dim drawFont As Font = New Font("Arial", fontSize, FontStyle.Bold)
-            Dim drawBrush As SolidBrush = New SolidBrush(Color.Green)
             Dim drawPoint As PointF = New PointF(size / 4, size / 4)
             e.Graphics.DrawString("*", drawFont, drawBrush, drawPoint)
 
@@ -193,6 +212,7 @@ Public Class MazeCustomisation
         If Not cell.EastWall Then
             UserLocation.X = UserLocation.X + 1
             Me.Refresh()
+            CheckExit()
         End If
     End Sub
 
@@ -201,6 +221,7 @@ Public Class MazeCustomisation
         If Not cell.NorthWall Then
             UserLocation.Y = UserLocation.Y - 1
             Me.Refresh()
+            CheckExit()
         End If
     End Sub
 
@@ -209,6 +230,7 @@ Public Class MazeCustomisation
         If Not cell.WestWall Then
             UserLocation.X = UserLocation.X - 1
             Me.Refresh()
+            CheckExit()
         End If
     End Sub
 
@@ -217,6 +239,51 @@ Public Class MazeCustomisation
         If Not cell.SouthWall Then
             UserLocation.Y = UserLocation.Y + 1
             Me.Refresh()
+            CheckExit()
         End If
+    End Sub
+
+    Private Sub SolvingAlgorithm_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SolvingAlgorithm.SelectedIndexChanged
+        If MazeModel IsNot Nothing Then
+            Dim mazeSolver = Solver.CreateSolver(SolvingAlgorithm.SelectedIndex)
+            Solution = mazeSolver.SolveMaze(MazeXML, New Point(0, 0), New Point(MazeModel.Width - 1, MazeModel.Height - 1))
+            Visited = mazeSolver.VisitedPoints
+            Me.Refresh()
+        End If
+    End Sub
+
+    Private Sub CheckVisited_CheckedChanged(sender As Object, e As EventArgs) Handles CheckVisited.CheckedChanged
+        If MazeModel IsNot Nothing Then
+            Dim mazeSolver = Solver.CreateSolver(SolvingAlgorithm.SelectedIndex)
+            Me.Refresh()
+        End If
+    End Sub
+
+    Private Function AtExit(point As Point) As Boolean
+        If point.Equals(ExitPoint) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Sub CheckExit()
+        If AtExit(UserLocation) Then
+            MessageBox.Show("Good job matey, you found the exit")
+            If EndlessMode Then
+                MazeHeight.Value += 1
+                MazeWidth.Value += 1
+                UserLocation.X = 0
+                UserLocation.Y = 0
+                GenerateMaze()
+            End If
+        End If
+    End Sub
+
+    Private Sub EndlessModePlay_Click(sender As Object, e As EventArgs) Handles EndlessModePlay.Click
+        MazeHeight.Value = 2
+        MazeWidth.Value = 2
+        EndlessMode = True
+        GenerateMaze()
     End Sub
 End Class

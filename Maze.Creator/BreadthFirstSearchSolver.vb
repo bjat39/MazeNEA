@@ -2,6 +2,12 @@
 
 Public Class BreadthFirstSearchSolver
     Implements IMazeSolver
+    Dim visited = New List(Of Point)
+    ReadOnly Public Property VisitedPoints As List(Of Point) Implements IMazeSolver.VisitedPoints
+        Get
+            Return visited
+        End Get
+    End Property
 
     Public Function SolveMaze(mazeXML As String, startPoint As Point, endPoint As Point) As List(Of Point) Implements IMazeSolver.SolveMaze
         Dim mazeToSolve As Creator.Maze = Utility.ConvertXMLToMaze(mazeXML)
@@ -22,6 +28,7 @@ Public Class BreadthFirstSearchSolver
         q.Enqueue(startPoint)
         Do While q.Count <> 0
             parent = q.Dequeue()
+            VisitedPoints.Add(parent)
             'Console.WriteLine($"Parent = {parent.X}, {parent.Y}")
             Dim children = Utility.GetAdjacentPoints(parent, mazeToSolve.Width, mazeToSolve.Height)
             If parent.Parent IsNot Nothing Then 'removes the parent's parent from the list of children cells

@@ -1,4 +1,4 @@
-﻿Public Class PrimsAlgorithm
+﻿Public Class Prims
     Implements IMazeGenerator
     Public Function GetMaze(ByRef x As Integer, ByRef y As Integer, ByRef seed As Integer, ByRef algorithm As MazeGenerationAlgorithms) As Maze Implements IMazeGenerator.GetMaze
         Randomize()
