@@ -40,11 +40,12 @@ Friend Class Tremaux
         VisitedPoints.Add(position)
         Dim passages = New List(Of Point)
         If position.X = EndPoint.X And position.Y = EndPoint.Y Then
+            ' Found end point!
             Dim l = New List(Of Point)
             l.Add(position)
             Return l
         End If
-        ' GetAdjacentPoints()
+
         Dim adjacentPoints = Utility.GetAdjacentPoints(position, MazeToSolve.Width, MazeToSolve.Height)
 
         'Removes parent from possible adjecent points
@@ -60,26 +61,27 @@ Friend Class Tremaux
                 passages.Add(adjacentPoint)
             End If
         Next
+
         Dim path = New List(Of Point)
         If passages.Count <> 0 Then
-            'Dim randomPoint As New Random
-            'Dim nextPos = passages.Item(randomPoint.Next(passages.Count))
-            'nextPos.Parent = position
-            'FindPath(nextPos)
             For Each passage In passages
                 If VisitedPoints.Contains(passage) Then
+                    ' circle - Already visited this passage
                     Return Nothing
                 End If
                 passage.Parent = position
                 path = FindPath(passage)
                 If path IsNot Nothing Then
+                    ' found solution
                     path.Add(passage.Parent)
                     Return path
                 End If
             Next
         Else
+            ' dead end
             Return Nothing
         End If
+        ' back tracking
         Return path
     End Function
 End Class

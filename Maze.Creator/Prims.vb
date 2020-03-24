@@ -32,7 +32,7 @@
             frontierPoints.Remove(frontierPoint)
             carvedPoints.Add(frontierPoint)
 
-            'add the points beside the old frontier to the frontier list
+            'add the points beside the old frontier point to the frontier list
             adjacentPoints = Utility.GetAdjacentPoints(frontierPoint, x, y)
             Utility.ExcludePointsInFirstList(carvedPoints, adjacentPoints)
             Utility.ExcludePointsInFirstList(frontierPoints, adjacentPoints)

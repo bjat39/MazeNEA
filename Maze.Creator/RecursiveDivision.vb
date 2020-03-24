@@ -23,13 +23,17 @@ Public Class RecursiveDivision
         Dim wheretocarve As Integer
         Dim horizontalVertical = 0 'randomNumber.Next(0, 2)
         If endX - beginX > endY - beginY Then
+            ' choose vertical
             horizontalVertical = 1
         ElseIf endX - beginX < endY - beginY Then
+            ' choose horizontal
             horizontalVertical = 0
         Else
+            ' Choose randomly
             horizontalVertical = randomNumber.Next(0, 2)
         End If
         If horizontalVertical = 0 Then
+            'bisect horizontal
             rowtobisect = randomNumber.Next(beginY, endY)
             wheretocarve = randomNumber.Next(beginX, endX)
             For o As Integer = beginX To endX
@@ -49,6 +53,7 @@ Public Class RecursiveDivision
                 BisectMaze(beginX, endX, rowtobisect + 1, endY, maze, randomNumber)
             End If
         Else
+            ' bisect vertical
             rowtobisect = randomNumber.Next(beginX, endX)
             wheretocarve = randomNumber.Next(beginY, endY)
             For o As Integer = beginY To endY
