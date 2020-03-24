@@ -14,6 +14,15 @@ Public Class Generate
         Dim xmlserialize As XmlSerializer = New XmlSerializer(GetType(Maze))
         Dim writer As TextWriter = New StringWriter()
         Dim gen As IMazeGenerator
+
+        If (height < 2) Then
+            Throw New ArgumentException("The height must be greater than 1", "height")
+        End If
+
+        If (width < 2) Then
+            Throw New ArgumentException("The width must be greater than 1", "width")
+        End If
+
         Select Case algo
             Case MazeGenerationAlgorithms.Prims
                 gen = New Prims()

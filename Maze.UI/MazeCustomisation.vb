@@ -269,7 +269,7 @@ Public Class MazeCustomisation
 
     Private Sub CheckExit()
         If AtExit(UserLocation) Then
-            MessageBox.Show("Good job matey, you found the exit")
+            MessageBox.Show("Good job, you found the exit")
             If EndlessMode Then
                 MazeHeight.Value += 1
                 MazeWidth.Value += 1

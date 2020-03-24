@@ -23,7 +23,7 @@ Friend Class Tremaux
         Me.MazeToSolve = mazeToSolve
         Me.EndPoint = endPoint
         Dim solution = New List(Of Point)
-        Dim l = New List(Of Point)
+        Dim path = New List(Of Point)
         Dim position As Point = startPoint
         If startPoint.X = endPoint.X And startPoint.Y = endPoint.Y Then
             solution.Add(startPoint)
@@ -31,9 +31,9 @@ Friend Class Tremaux
         End If
 
         'visiting the child point
-        l = FindPath(startPoint)
+        path = FindPath(startPoint)
 
-        Return l
+        Return path
     End Function
 
     Public Function FindPath(position As Point) As List(Of Point)
